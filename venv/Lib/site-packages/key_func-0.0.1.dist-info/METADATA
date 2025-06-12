@@ -1,0 +1,23 @@
+Metadata-Version: 2.1
+Name: key-func
+Version: 0.0.1
+Summary: Demo library
+Home-page: https://key_func.readthedocs.io/
+Author: Dhruv Jani
+Author-email: dj2131@nyu.edu
+License: MIT
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+Requires-Dist: numpy
+
+I built a library to print the key function that will replace the key value in the main function and hence protecting the key. 
+

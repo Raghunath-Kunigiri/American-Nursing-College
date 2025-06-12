@@ -3,308 +3,682 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANC</title>
+    <title>American College of Nursing - Excellence in Healthcare Education</title>
+    
+    <!-- Favicon and Web App Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/ANC_logo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/ANC_logo.png">
+    <link rel="shortcut icon" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/ANC_logo.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/ANC_logo.png">
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Enhanced SEO Meta Tags -->
+    <meta name="description" content="American College of Nursing - Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses. Established 1988. 98% placement rate with excellence in nursing education.">
+    <meta name="keywords" content="nursing college, healthcare education, GNM, BSc Nursing, paramedical courses, medical education, nursing school, healthcare careers, medical training, nursing degree, healthcare professionals">
+    <meta name="author" content="American College of Nursing">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="msapplication-TileColor" content="#1e40af">
+    <meta name="msapplication-TileImage" content="images/ANC_logo.png">
+    <link rel="canonical" href="https://americancollegeofnursing.com/">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "American College of Nursing",
+        "alternateName": "ACN",
+        "url": "https://americancollegeofnursing.com",
+        "logo": "https://americancollegeofnursing.com/images/ANC_logo.png",
+        "description": "Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses since 1988.",
+        "foundingDate": "1988",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Balaji Villas, Kalyana Durgam Road",
+            "addressLocality": "Anantapur",
+            "addressRegion": "Andhra Pradesh",
+            "postalCode": "515004",
+            "addressCountry": "India"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-7013370612",
+            "contactType": "Admissions",
+            "email": "Schoolofnursing10@gmail.com"
+        },
+        "sameAs": [
+            "https://facebook.com/americancollegeofnursing",
+            "https://instagram.com/americancollegeofnursing"
+        ]
+    }
+    </script>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://americancollegeofnursing.com/">
+    <meta property="og:title" content="American College of Nursing - Excellence in Healthcare Education">
+    <meta property="og:description" content="Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses. Established 1988.">
+    <meta property="og:image" content="images/ANC_logo.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://americancollegeofnursing.com/">
+    <meta property="twitter:title" content="American College of Nursing - Excellence in Healthcare Education">
+    <meta property="twitter:description" content="Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses. Established 1988.">
+    <meta property="twitter:image" content="images/ANC_logo.png">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="static/index.css">
 </head>
 <body>
-    <header>
+    <!-- Modern Header -->
+    <header class="header" id="header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <img src="images/ANC_logo.png" alt="ANC Logo">
-                    <h1><a href="#home">American Nursing College</a></h1>
-                </div>
-                <div class="mobile-toggle" id="mobileToggle">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <nav id="mainNav">
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#courses">Courses</a></li>
-                        <li><a href="#facilities">Facilities</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#admissions">Admissions</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </nav>
+            <div class="logo-container">
+                <img src="images/ANC_logo.png" alt="ACN Logo" class="logo">
+                <a href="#home" class="logo-text">ACN</a>
             </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="nav" id="nav">
+                <a href="#home" class="nav-button active">Home</a>
+                <a href="#about" class="nav-button">About</a>
+                <a href="#programs" class="nav-button">Programs</a>
+                <a href="#facilities" class="nav-button">Facilities</a>
+                <a href="#gallery" class="nav-button">Gallery</a>
+                <a href="#testimonials" class="nav-button">Testimonials</a>
+                <a href="#admissions" class="nav-button">Admissions</a>
+                <a href="#contact" class="nav-button">Contact</a>
+            </nav>
         </div>
     </header>
 
+    <!-- Floating Apply Now Button -->
+    <div class="floating-cta" id="floatingCTA">
+        <a href="#admissions" class="floating-btn">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Apply Now</span>
+        </a>
+    </div>
+
+    <!-- Modern Hero Section -->
     <section id="home" class="hero">
-        <h2>Excellence in Nursing Education</h2>
-        <p>Building Tomorrow's Healthcare Leaders</p>
-        <div class="hero-buttons">
-            <a href="#courses" class="btn btn-primary">Explore Courses</a>
-            <a href="#admissions" class="btn btn-outline">Apply Now</a>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <div class="established" data-aos="fade-in" data-aos-delay="200">ESTABLISHED 1988</div>
+            <h1 data-aos="fade-up" data-aos-delay="400" data-aos-duration="1000" data-aos-easing="ease-in-out-cubic">Excellence in<br>Healthcare Education</h1>
+            <p data-aos="fade-up" data-aos-delay="600" data-aos-duration="800" data-aos-easing="ease-out">Empowering the next generation of healthcare professionals with world-class education, cutting-edge facilities, and comprehensive training programs that prepare students for successful careers in nursing and healthcare.</p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="800" data-aos-duration="800" data-aos-easing="ease-out">
+                <a href="#programs" class="btn btn-primary">
+                    <i class="fas fa-graduation-cap"></i>
+                    Explore Programs
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Visit Campus
+                    <span class="arrow">→</span>
+                </a>
+            </div>
         </div>
     </section>
 
-    <section id="about" data-aos="fade-up">
+    <!-- Modern About Section -->
+    <section id="about" class="about-section" data-aos="fade-up">
         <div class="container">
-            <h2>About American Nursing College</h2>
-            <p>Shaping healthcare professionals with excellence, ethics, and expertise since 2005.</p>
-            
             <div class="about-content">
-                <div class="about-image">
-                    <img src="/api/placeholder/600/400" alt="ANC Nursing College Campus">
+                <div class="about-text" data-aos="fade-right">
+                    <h2>About American College of Nursing</h2>
+                    <p>Shaping healthcare professionals with excellence, ethics, and expertise since 1988.</p>
+                    <p>American College of Nursing is a premier institution dedicated to providing exceptional education and practical training for aspiring healthcare professionals. With state-of-the-art facilities and experienced faculty, we prepare our students to excel in the dynamic field of healthcare.</p>
+                    <p>Our comprehensive curriculum combines theoretical knowledge with hands-on experience, ensuring graduates are well-equipped to meet the challenges of modern healthcare environments and make meaningful contributions to patient care.</p>
+                    <div class="about-features">
+                        <div class="feature-list">
+                            <div class="feature-item">
+                                <i class="fas fa-award"></i>
+                                <span>NAAC Accredited Programs</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-university"></i>
+                                <span>Modern Campus Infrastructure</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-stethoscope"></i>
+                                <span>Clinical Training Partnerships</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-text">
-                    <p>ANC Nursing College is a leading institution dedicated to providing exceptional education and practical training for aspiring healthcare professionals. With state-of-the-art facilities and experienced faculty, we prepare our students to excel in the dynamic field of healthcare.</p>
-                    <p>Our curriculum combines theoretical knowledge with hands-on experience, ensuring graduates are well-equipped to meet the challenges of modern healthcare environments. We prioritize ethical practice, critical thinking, and compassionate care in all our programs.</p>
-                    
-                    <div class="stats-container">
-                        <div class="stat-item">
-                            <div class="stat-number" id="yearsCounter">36+</div>
-                            <div class="stat-label">Years of Excellence</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number" id="StudentsCount">2220+</div>
-                            <div class="stat-label">Successful Alumni</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">98%</div>
-                            <div class="stat-label">Placement Rate</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">20+</div>
-                            <div class="stat-label">Expert Faculty</div>
-                        </div>
+                <div class="stats-container" data-aos="fade-left" data-aos-duration="1500" data-aos-easing="ease-in-out">
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="100" data-aos-duration="600" data-aos-easing="ease-out">
+                        <div class="stat-number" id="yearsCounter">36+</div>
+                        <div class="stat-label">Years of Excellence</div>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="600" data-aos-easing="ease-out">
+                        <div class="stat-number" id="StudentsCount">3,240+</div>
+                        <div class="stat-label">Successful Alumni</div>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="600" data-aos-easing="ease-out">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Placement Rate</div>
+                    </div>
+                    <div class="stat-item" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="600" data-aos-easing="ease-out">
+                        <div class="stat-number">25+</div>
+                        <div class="stat-label">Expert Faculty</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="courses" data-aos="fade-up">
+    <!-- Enhanced Career Section with Video Background -->
+    <section class="career-section">
+        <video class="background-video" autoplay muted loop playsinline>
+            <source src="static/Video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="career-content" data-aos="fade-up">
+            <div class="career-title">Your Path to a Rewarding Career</div>
+            <div class="program-title">Diverse Nursing Programs</div>
+            <div class="program-section">
+                <div class="program-info">
+                    <p>Our BSc and GNM programs are designed to equip students with cutting-edge skills for a successful nursing career.</p>
+                    <div class="features">
+                        <div class="feature" data-aos="fade-right" data-aos-delay="200">
+                            <div class="feature-icon"></div>
+                            <h3>Comprehensive curriculum with hands-on training</h3>
+                        </div>
+                        <div class="feature" data-aos="fade-right" data-aos-delay="400">
+                            <div class="feature-icon"></div>
+                            <h3>World-class faculty dedicated to your success</h3>
+                        </div>
+                        <div class="feature" data-aos="fade-right" data-aos-delay="600">
+                            <div class="feature-icon"></div>
+                            <h3>State-of-the-art simulation labs and equipment</h3>
+                        </div>
+                    </div>
+                    <button class="program-button" data-aos="bounce-in" data-aos-delay="800">Learn More</button>
+                </div>
+                <div class="program-image" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="static/anatomy lab.png" alt="Nursing students in lab" class="floating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Programs Section -->
+    <section id="programs" class="programs-section" data-aos="fade-up">
         <div class="container">
             <h2>Our Programs</h2>
             <p>Comprehensive healthcare education designed to meet industry standards and prepare future healthcare leaders.</p>
             
             <div class="course-grid">
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="100">
                     <div class="course-image">
                         <img src="/api/placeholder/400/250" alt="General Nursing">
+                        <div class="course-overlay">
+                            <i class="fas fa-user-nurse"></i>
+                        </div>
                     </div>
                     <div class="course-details">
-                        <h3>General Nursing</h3>
-                        <p>Comprehensive training in nursing fundamentals, patient care, and clinical practice.</p>
-                        <a href="#">Learn More →</a>
+                        <h3>General Nursing & Midwifery (GNM)</h3>
+                        <p>A comprehensive diploma program designed to train skilled nurses and midwives for patient care and community health.</p>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 3.5 Years</span>
+                            <span><i class="fas fa-certificate"></i> Diploma</span>
+                        </div>
+                        <a href="#" class="course-btn">Learn More →</a>
                     </div>
                 </div>
                 
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="200">
                     <div class="course-image">
                         <img src="/api/placeholder/400/250" alt="Bachelor in Nursing">
+                        <div class="course-overlay">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
                     </div>
                     <div class="course-details">
-                        <h3>Bachelor in Nursing</h3>
-                        <p>Advanced degree program focusing on healthcare leadership and specialized nursing skills.</p>
-                        <a href="#">Learn More →</a>
+                        <h3>Bachelor of Science in Nursing</h3>
+                        <p>A four-year degree program offering advanced nursing education, clinical expertise, and leadership skills.</p>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 4 Years</span>
+                            <span><i class="fas fa-certificate"></i> Bachelor's</span>
+                        </div>
+                        <a href="#" class="course-btn">Learn More →</a>
                     </div>
                 </div>
                 
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="300">
                     <div class="course-image">
-                        <img src="/api/placeholder/400/250" alt="Diploma in Anesthesia">
+                        <img src="/api/placeholder/400/250" alt="Paramedical Nursing">
+                        <div class="course-overlay">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
                     </div>
                     <div class="course-details">
-                        <h3>Diploma in Anesthesia</h3>
-                        <p>Specialized training in anesthesia administration and patient monitoring.</p>
-                        <a href="#">Learn More →</a>
+                        <h3>Paramedical in Nursing</h3>
+                        <p>Specialized training with subgroups including Emergency Medical Services, Operation Theatre Technology, and more.</p>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 2 Years</span>
+                            <span><i class="fas fa-certificate"></i> Diploma</span>
+                        </div>
+                        <a href="#" class="course-btn">Explore Subgroups →</a>
                     </div>
                 </div>
                 
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="400">
                     <div class="course-image">
                         <img src="/api/placeholder/400/250" alt="Medical Lab Technician">
+                        <div class="course-overlay">
+                            <i class="fas fa-microscope"></i>
+                        </div>
                     </div>
                     <div class="course-details">
                         <h3>Medical Lab Technician</h3>
                         <p>Training in laboratory procedures, sample analysis, and diagnostic testing.</p>
-                        <a href="#">Learn More →</a>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 2 Years</span>
+                            <span><i class="fas fa-certificate"></i> Diploma</span>
+                        </div>
+                        <a href="#" class="course-btn">Learn More →</a>
                     </div>
                 </div>
                 
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="500">
                     <div class="course-image">
                         <img src="/api/placeholder/400/250" alt="Cardiology Technician">
+                        <div class="course-overlay">
+                            <i class="fas fa-heart"></i>
+                        </div>
                     </div>
                     <div class="course-details">
                         <h3>Cardiology Technician</h3>
                         <p>Specialized program focused on cardiac care, EKG monitoring, and cardiovascular health.</p>
-                        <a href="#">Learn More →</a>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 1.5 Years</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <a href="#" class="course-btn">Learn More →</a>
                     </div>
                 </div>
                 
-                <div class="course-card">
+                <div class="course-card" data-aos="flip-left" data-aos-delay="600">
                     <div class="course-image">
                         <img src="/api/placeholder/400/250" alt="Multipurpose Health Assistant">
+                        <div class="course-overlay">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
                     </div>
                     <div class="course-details">
                         <h3>Multipurpose Health Assistant</h3>
                         <p>Versatile training program covering various aspects of healthcare support and assistance.</p>
-                        <a href="#">Learn More →</a>
+                        <div class="course-features">
+                            <span><i class="fas fa-clock"></i> 1 Year</span>
+                            <span><i class="fas fa-certificate"></i> Certificate</span>
+                        </div>
+                        <a href="#" class="course-btn">Learn More →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="facilities" data-aos="fade-up">
+    <!-- Enhanced Facilities Section -->
+    <section id="facilities" class="facilities-section" data-aos="fade-up">
         <div class="container">
             <h2>Campus Facilities</h2>
             <p>State-of-the-art infrastructure ensuring comfort, safety, and an optimal learning environment.</p>
             
-            <div class="facilities-wrapper">
-                <div class="facility-item">
+            <div class="facilities-grid">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="100">
                     <div class="facility-icon">
                         <i class="fas fa-home"></i>
                     </div>
                     <h3>On-Campus Hostel</h3>
-                    <p>Comfortable accommodation with modern amenities and 24/7 security.</p>
+                    <p>Comfortable accommodation with modern amenities and 24/7 security for a safe living environment.</p>
                 </div>
                 
-                <div class="facility-item">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="200">
                     <div class="facility-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
                     <h3>Dining Facilities</h3>
-                    <p>Nutritious meals prepared in hygienic conditions to keep students healthy.</p>
+                    <p>Nutritious meals prepared in hygienic conditions to keep students healthy and energized.</p>
                 </div>
                 
-                <div class="facility-item">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="300">
                     <div class="facility-icon">
                         <i class="fas fa-bus"></i>
                     </div>
                     <h3>Transportation</h3>
-                    <p>Convenient bus service covering major routes for commuting students.</p>
+                    <p>Convenient bus service covering major routes for easy commuting of students.</p>
                 </div>
                 
-                <div class="facility-item">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="400">
                     <div class="facility-icon">
-                        <i class="fas fa-futbol"></i>
+                        <i class="fas fa-dumbbell"></i>
                     </div>
-                    <h3>Sports Facilities</h3>
-                    <p>Well-maintained playground and recreational areas for physical activities.</p>
+                    <h3>Sports & Recreation</h3>
+                    <p>Well-maintained playground and recreational areas for physical activities and wellness.</p>
                 </div>
                 
-                <div class="facility-item">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="500">
                     <div class="facility-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3>24/7 Security</h3>
-                    <p>Round-the-clock surveillance and security personnel for campus safety.</p>
+                    <p>Round-the-clock surveillance and security personnel ensuring campus safety.</p>
                 </div>
                 
-                <div class="facility-item">
+                <div class="facility-card" data-aos="zoom-in" data-aos-delay="600">
                     <div class="facility-icon">
                         <i class="fas fa-user-md"></i>
                     </div>
                     <h3>Expert Faculty</h3>
-                    <p>Experienced professionals dedicated to student success and excellence.</p>
+                    <p>Experienced professionals dedicated to student success and academic excellence.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="testimonials" data-aos="fade-up">
+    <!-- Enhanced Gallery Section -->
+    <section id="gallery" class="gallery-section" data-aos="fade-up">
         <div class="container">
-            <h2>Student Testimonials</h2>
-            <p>Hear what our graduates have to say about their experience at ANC Nursing College.</p>
-            
-            <div class="testimonial-container">
-                <div class="testimonial-slide">
-                    <div class="testimonial-text">
-                        The hands-on training and supportive faculty at ANC Nursing College prepared me exceptionally well for my career in healthcare. The clinical exposure and practical sessions gave me confidence to handle real-world situations.
+            <h2>Campus Life</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="100" 
+                     data-image="static/anatomy lab.png" 
+                     data-title="Modern Anatomy Laboratory" 
+                     data-description="State-of-the-art anatomy lab equipped with advanced models and learning resources for comprehensive medical education">
+                    <img src="static/anatomy lab.png" alt="Anatomy Laboratory" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Anatomy Laboratory</h3>
+                        <p>Advanced anatomical models and resources</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
                     </div>
-                    <div class="testimonial-author">Priya Sharma</div>
-                    <div class="testimonial-role">Class of 2023, Now at Apollo Hospitals</div>
+                </div>
+                
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="200"
+                     data-image="images/ANC_logo.png" 
+                     data-title="College Campus" 
+                     data-description="Our beautiful and modern campus provides an ideal environment for learning and growth">
+                    <img src="images/ANC_logo.png" alt="College Campus" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Campus Overview</h3>
+                        <p>Modern infrastructure and facilities</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="300"
+                     data-image="static/anatomy lab.png" 
+                     data-title="Practical Training Lab" 
+                     data-description="Hands-on training facilities designed to provide real-world medical experience">
+                    <img src="static/anatomy lab.png" alt="Training Laboratory" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Training Labs</h3>
+                        <p>Hands-on learning environments</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="400"
+                     data-image="images/ANC_logo.png" 
+                     data-title="Student Facilities" 
+                     data-description="Comprehensive student amenities including library, cafeteria, and recreational areas">
+                    <img src="images/ANC_logo.png" alt="Student Facilities" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Student Amenities</h3>
+                        <p>Comprehensive facilities for student life</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="500"
+                     data-image="static/anatomy lab.png" 
+                     data-title="Simulation Training" 
+                     data-description="Advanced medical simulation equipment for realistic training scenarios">
+                    <img src="static/anatomy lab.png" alt="Medical Simulation" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Simulation Labs</h3>
+                        <p>Real-world medical training scenarios</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="gallery-item lightbox-trigger" data-aos="zoom-in" data-aos-delay="600"
+                     data-image="images/ANC_logo.png" 
+                     data-title="Campus Environment" 
+                     data-description="Beautiful and serene campus environment that promotes learning and well-being">
+                    <img src="images/ANC_logo.png" alt="Campus Environment" loading="lazy">
+                    <div class="gallery-overlay">
+                        <h3>Campus Environment</h3>
+                        <p>Beautiful and inspiring surroundings</p>
+                        <div class="gallery-zoom">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="admissions" data-aos="fade-up">
+    <!-- Enhanced Testimonials Section -->
+    <section id="testimonials" class="testimonials-section" data-aos="fade-up">
         <div class="container">
-            <h2>Admissions</h2>
-            <p>Take the first step toward your healthcare career by applying to ANC Nursing College.</p>
+            <h2>What Our Students Say</h2>
+            <p>Hear from our graduates about their transformative experience at ANC.</p>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card active" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"The hands-on training and supportive faculty at ANC prepared me exceptionally well for my career in healthcare. The clinical exposure gave me confidence to handle real-world situations."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/80/80" alt="Priya Sharma">
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <span>BSc Nursing 2022, Apollo Hospitals</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-content">
+                        <div class="quote-icon">
+                            <i class="fas fa-quote-left"></i>
+                        </div>
+                        <p>"The community here is amazing, and the comprehensive curriculum prepared me for every challenge in my nursing career. I felt ready to take on real-world responsibilities."</p>
+                        <div class="testimonial-author">
+                            <img src="/api/placeholder/80/80" alt="John Smith">
+                            <div class="author-info">
+                                <h4>John Smith</h4>
+                                <span>GNM 2023, City Hospital</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Admissions Section -->
+    <section id="admissions" class="admissions-section" data-aos="fade-up">
+        <div class="container">
+            <h2>Start Your Journey</h2>
+            <p>Join a legacy of excellence. Learn about our admission process and take the first step toward a transformative career.</p>
             
             <div class="admission-container">
-                <div class="admission-form">
-                    <form action="/submit" method="POST">
-                        <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                <div class="admission-form" data-aos="slide-right">
+                    <h3>Apply Now</h3>
+                    <form action="/submit" method="POST" class="enhanced-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                                <span class="form-bar"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                                <span class="form-bar"></span>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="course">Interested Course</label>
-                            <select id="course" name="course" class="form-control" required>
-                                <option value="">Select a course</option>
-                                <option value="General Nursing">General Nursing</option>
-                                <option value="Bachelor in Nursing">Bachelor in Nursing</option>
-                                <option value="Diploma in Anesthesia">Diploma in Anesthesia</option>
-                                <option value="Medical Lab Technician">Medical Lab Technician</option>
-                                <option value="Cardiology Technician">Cardiology Technician</option>
-                                <option value="Multipurpose Health Assistant">Multipurpose Health Assistant</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" required>
+                                <span class="form-bar"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="course">Interested Course</label>
+                                <select id="course" name="course" class="form-control" required>
+                                    <option value="">Select a course</option>
+                                    <option value="General Nursing">General Nursing & Midwifery</option>
+                                    <option value="Bachelor in Nursing">Bachelor of Science in Nursing</option>
+                                    <option value="Paramedical Nursing">Paramedical in Nursing</option>
+                                    <option value="Medical Lab Technician">Medical Lab Technician</option>
+                                    <option value="Cardiology Technician">Cardiology Technician</option>
+                                    <option value="Multipurpose Health Assistant">Multipurpose Health Assistant</option>
+                                </select>
+                                <span class="form-bar"></span>
+                            </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Additional Information</label>
                             <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                            <span class="form-bar"></span>
                         </div>
                         
-                        <button type="submit" class="form-submit">Submit Application</button>
+                        <button type="submit" class="form-submit">
+                            <span>Submit Application</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
                     </form>
                 </div>
                 
-                <div class="admission-info">
+                <div class="admission-info" data-aos="slide-left">
                     <h3>Admission Process</h3>
                     
-                    <div class="admission-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>Submit Application</h4>
-                            <p>Complete the online application form with all required details.</p>
+                    <div class="admission-steps">
+                        <div class="admission-step" data-aos="fade-up" data-aos-delay="100">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Submit Application</h4>
+                                <p>Complete the online application form with all required details and documents.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="admission-step" data-aos="fade-up" data-aos-delay="200">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Document Verification</h4>
+                                <p>All educational documents undergo verification for eligibility check.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="admission-step" data-aos="fade-up" data-aos-delay="300">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Counseling</h4>
+                                <p>Shortlisted candidates will be invited for general counseling session.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="admission-step" data-aos="fade-up" data-aos-delay="400">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Admission Confirmation</h4>
+                                <p>Selected students receive confirmation letter and fee structure details.</p>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="admission-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>Documents Verification</h4>
-                            <p>All Education documents under go verification for eligibility check.</p>
+                    <div class="admission-buttons">
+                        <a href="#" class="btn btn-primary">Download Brochure</a>
+                        <a href="#" class="btn btn-outline">Admission Requirements</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section" data-aos="fade-up" data-aos-delay="200">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What are the eligibility criteria for BSc Nursing?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Candidates must have completed 12th grade with Physics, Chemistry, and Biology with minimum 50% marks. Minimum age should be 17 years and maximum 35 years.</p>
                         </div>
                     </div>
                     
-                    <div class="admission-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>Counciling</h4>
-                            <p>Shortlisted candidates will be invited for a General Counciling.</p>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What is the duration of the GNM program?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>The General Nursing and Midwifery (GNM) program is of 3.5 years duration, which includes 6 months of internship.</p>
                         </div>
                     </div>
                     
-                    <div class="admission-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Admission Confirmation</h4>
-                            <p>Selected students receive confirmation letter and fee structure.</p>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Are there scholarship opportunities available?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer merit-based scholarships for outstanding students and need-based financial assistance for economically disadvantaged students.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What is the placement record of the college?</h4>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We maintain a 98% placement record with tie-ups with leading hospitals and healthcare institutions across India and internationally.</p>
                         </div>
                     </div>
                 </div>
@@ -312,59 +686,57 @@
         </div>
     </section>
 
-    <section id="contact" data-aos="fade-up">
+    <!-- Enhanced Contact Section -->
+    <section id="contact" class="contact-section" data-aos="fade-up">
         <div class="container">
             <h2>Contact Us</h2>
             <p>We're here to answer any questions you may have about our programs or admission process.</p>
             
             <div class="contact-container">
-                <div class="contact-info">
+                <div class="contact-info" data-aos="slide-right">
                     <h3>Get in Touch</h3>
                     
-                    <div class="contact-detail">
-                        <div class="contact-icon">
+                    <div class="contact-details">
+                        <a href="tel:+917013370612" class="contact-button">
                             <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-text">
-                            <p><a href="tel:9989953273">9989953273</a>, <a href="tel:7013370612">7013370612</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-detail">
-                        <div class="contact-icon">
+                            <div class="contact-text">
+                                <h4>Call Us</h4>
+                                <p>+91 7013370612, +91 9989953273</p>
+                            </div>
+                        </a>
+                        
+                        <a href="mailto:Schoolofnursing10@gmail.com" class="contact-button">
                             <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-text">
-                            <p><a href="mailto:Americancollegeatp@gmail.com">Americancollegeatp@gmail.com</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-detail">
-                        <div class="contact-icon">
+                            <div class="contact-text">
+                                <h4>Email Us</h4>
+                                <p>Schoolofnursing10@gmail.com</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://maps.app.goo.gl/xkCScQLCrkHDZUVH9" target="_blank" class="contact-button">
                             <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-text">
-                            <p>ANC Nursing College Campus, <br>Medical District, <br>Hyderabad - 500032</p>
-                            <p><a href="https://maps.app.goo.gl/Q8yRrPvPzgDnYmJU8" target="_blank">View on Google Maps</a></p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-detail">
-                        <div class="contact-icon">
+                            <div class="contact-text">
+                                <h4>Visit Us</h4>
+                                <p>Balaji Villas, Kalyana Durgam Road<br>Andhra Pradesh 515004, India</p>
+                            </div>
+                        </a>
+                        
+                        <div class="contact-button">
                             <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-text">
-                            <p>Office Hours: Monday to Saturday<br>9:00 AM - 5:00 PM</p>
+                            <div class="contact-text">
+                                <h4>Office Hours</h4>
+                                <p>Monday to Saturday<br>9:00 AM - 5:00 PM</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-map">
+                <div class="contact-map" data-aos="slide-left">
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.026693387162!2d77.5627286!3d14.680629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb14acaafe65bd7%3A0xb594966a4f158988!2sAmerican%20College%20Of%20Nursing!5e0!3m2!1sen!2sin!4v1689078357642!5m2!1sen!2sin" 
                         width="100%" 
                         height="450" 
-                        style="border:0;" 
+                        style="border:0; border-radius: 15px;" 
                         allowfullscreen="" 
                         loading="lazy">
                     </iframe>
@@ -373,128 +745,470 @@
         </div>
     </section>
 
-    <footer>
+    <!-- Enhanced Footer -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
-                    <h3>ANC Nursing College</h3>
-                    <p>Dedicated to excellence in healthcare education since 2005. Our mission is to prepare compassionate, skilled, and ethical healthcare professionals.</p>
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-logo">
+                        <img src="images/ANC_logo.png" alt="ANC Logo" class="footer-logo-img">
+                        <h3>American College of Nursing</h3>
+                    </div>
+                    <p>Dedicated to excellence in healthcare education since 1988. Our mission is to prepare compassionate, skilled, and ethical healthcare professionals for tomorrow's challenges.</p>
                     <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
-                <div class="footer-column">
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
                     <h3>Quick Links</h3>
-                    <ul>
+                    <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
-                        <li><a href="#courses">Our Programs</a></li>
+                        <li><a href="#programs">Our Programs</a></li>
                         <li><a href="#facilities">Campus Facilities</a></li>
                         <li><a href="#admissions">Admissions</a></li>
                         <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="300">
                     <h3>Programs</h3>
-                    <ul>
-                        <li><a href="#">General Nursing</a></li>
-                        <li><a href="#">Bachelor in Nursing</a></li>
-                        <li><a href="#">Diploma in Anesthesia</a></li>
+                    <ul class="footer-links">
+                        <li><a href="#">General Nursing & Midwifery</a></li>
+                        <li><a href="#">Bachelor of Science in Nursing</a></li>
+                        <li><a href="#">Paramedical in Nursing</a></li>
                         <li><a href="#">Medical Lab Technician</a></li>
                         <li><a href="#">Cardiology Technician</a></li>
                         <li><a href="#">Multipurpose Health Assistant</a></li>
                     </ul>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-phone"></i> <a href="tel:9989953273">9989953273</a></p>
-                    <p><i class="fas fa-phone"></i> <a href="tel:7013370612">7013370612</a></p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:Americancollegeatp@gmail.com">Americancollegeatp@gmail.com</a></p>
+                <div class="footer-section" data-aos="fade-up" data-aos-delay="400">
+                    <h3>Contact Info</h3>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> <a href="tel:+917013370612">+91 7013370612</a></p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+919989953273">+91 9989953273</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:Schoolofnursing10@gmail.com">Schoolofnursing10@gmail.com</a></p>
+                        <p><i class="fas fa-map-marker-alt"></i> Balaji Villas, Kalyana Durgam Road, AP 515004</p>
+                    </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <span id="currentYear"></span> ANC Nursing College. All Rights Reserved.</p>
+                <div class="footer-bottom-content">
+                    <p>&copy; <span id="currentYear"></span> American College of Nursing. All Rights Reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </footer>
-    <script>
-        // Update copyright year
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
 
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-overlay"></div>
+        <div class="lightbox-container">
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="lightbox-content">
+                <img id="lightboxImage" src="" alt="">
+                <div class="lightbox-caption">
+                    <h3 id="lightboxTitle"></h3>
+                    <p id="lightboxDescription"></p>
+                </div>
+            </div>
+            <div class="lightbox-counter">
+                <span id="lightboxCounter">1 / 6</span>
+            </div>
+        </div>
+    </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        // Initialize AOS animation library
+        // Initialize AOS animation library with professional timing
         AOS.init({
             duration: 800,
-            easing: 'ease-in-out',
-            once: true
+            easing: 'ease-in-out-cubic',
+            once: true,
+            offset: 120,
+            delay: 0,
+            anchorPlacement: 'top-bottom'
         });
+
+        // Update copyright year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Floating CTA Button Control
+        const floatingCTA = document.getElementById('floatingCTA');
+        const heroSection = document.getElementById('home');
         
-        // Mobile navigation toggle
-        document.getElementById('mobileToggle').addEventListener('click', function() {
-            document.getElementById('mainNav').classList.toggle('active');
+        window.addEventListener('scroll', () => {
+            const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+            const scrollPosition = window.pageYOffset;
+            
+            if (scrollPosition > heroBottom - 200) {
+                floatingCTA.classList.add('visible');
+            } else {
+                floatingCTA.classList.remove('visible');
+            }
         });
+
+        // FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.closest('.faq-item');
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Lightbox Gallery Functionality
+        class LightboxGallery {
+            constructor() {
+                this.modal = document.getElementById('lightboxModal');
+                this.image = document.getElementById('lightboxImage');
+                this.title = document.getElementById('lightboxTitle');
+                this.description = document.getElementById('lightboxDescription');
+                this.counter = document.getElementById('lightboxCounter');
+                this.closeBtn = document.getElementById('lightboxClose');
+                this.prevBtn = document.getElementById('lightboxPrev');
+                this.nextBtn = document.getElementById('lightboxNext');
+                this.overlay = this.modal.querySelector('.lightbox-overlay');
+                
+                this.images = [];
+                this.currentIndex = 0;
+                
+                this.init();
+            }
+            
+            init() {
+                // Collect all gallery images
+                const triggers = document.querySelectorAll('.lightbox-trigger');
+                triggers.forEach((trigger, index) => {
+                    this.images.push({
+                        src: trigger.dataset.image,
+                        title: trigger.dataset.title,
+                        description: trigger.dataset.description
+                    });
+                    
+                    trigger.addEventListener('click', () => {
+                        this.open(index);
+                    });
+                });
+                
+                // Event listeners
+                this.closeBtn.addEventListener('click', () => this.close());
+                this.overlay.addEventListener('click', () => this.close());
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+                
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (!this.modal.classList.contains('active')) return;
+                    
+                    switch(e.key) {
+                        case 'Escape':
+                            this.close();
+                            break;
+                        case 'ArrowLeft':
+                            this.prev();
+                            break;
+                        case 'ArrowRight':
+                            this.next();
+                            break;
+                    }
+                });
+            }
+            
+            open(index) {
+                this.currentIndex = index;
+                this.updateContent();
+                this.modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            close() {
+                this.modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            prev() {
+                this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+                this.updateContent();
+            }
+            
+            next() {
+                this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                this.updateContent();
+            }
+            
+            updateContent() {
+                const current = this.images[this.currentIndex];
+                this.image.src = current.src;
+                this.image.alt = current.title;
+                this.title.textContent = current.title;
+                this.description.textContent = current.description;
+                this.counter.textContent = `${this.currentIndex + 1} / ${this.images.length}`;
+            }
+        }
         
+        // Initialize lightbox when DOM is loaded
+        new LightboxGallery();
+
+        // Enhanced Statistics Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const duration = 2000; // 2 seconds
+            
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+                const suffix = counter.textContent.replace(/[0-9]/g, '');
+                let current = 0;
+                const increment = target / (duration / 16); // 60fps
+                
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.floor(current) + suffix;
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target + suffix;
+                    }
+                };
+                
+                // Start animation when element comes into view
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        }
+        
+        // Initialize counter animations
+        animateCounters();
+
+        // Enhanced Testimonial Slider
+        class TestimonialSlider {
+            constructor() {
+                this.cards = document.querySelectorAll('.testimonial-card');
+                this.currentIndex = 0;
+                this.autoPlayInterval = null;
+                this.autoPlayDelay = 5000; // 5 seconds
+                
+                this.init();
+            }
+            
+            init() {
+                if (this.cards.length <= 1) return;
+                
+                this.startAutoPlay();
+                
+                // Pause on hover
+                this.cards.forEach(card => {
+                    card.addEventListener('mouseenter', () => this.stopAutoPlay());
+                    card.addEventListener('mouseleave', () => this.startAutoPlay());
+                });
+            }
+            
+            showSlide(index) {
+                this.cards.forEach(card => card.classList.remove('active'));
+                this.cards[index].classList.add('active');
+                this.currentIndex = index;
+            }
+            
+            nextSlide() {
+                const nextIndex = (this.currentIndex + 1) % this.cards.length;
+                this.showSlide(nextIndex);
+            }
+            
+            startAutoPlay() {
+                this.stopAutoPlay();
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoPlayDelay);
+            }
+            
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+        }
+        
+        // Initialize testimonial slider
+        new TestimonialSlider();
+
+        // Enhanced Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('nav');
+        const header = document.getElementById('header');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-button').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                nav.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            });
+        });
+
+        // Enhanced Header Scroll Effect
+        let lastScroll = 0;
+        const scrollThreshold = 100;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            // Add scrolled class for styling
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Show/hide header based on scroll direction
+            if (currentScroll <= 0 || currentScroll < lastScroll) {
+                header.classList.remove('hide');
+                header.classList.add('show');
+            } else if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+                header.classList.remove('show');
+                header.classList.add('hide');
+            }
+
+            lastScroll = currentScroll;
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                
-                // Close mobile menu if open
-                if (document.getElementById('mainNav').classList.contains('active')) {
-                    document.getElementById('mainNav').classList.remove('active');
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
-        
-        // Sticky header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
+
+        // Video playback control
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.querySelector(".background-video");
+            if (video) {
+                video.playbackRate = 0.7; // Slow down video
+            }
         });
-    </script>
-    <script>
+
         // Calculate years since 1988
         function updateYearsCounter() {
             const startYear = 1988;
             const currentYear = new Date().getFullYear();
             const yearsOfOperation = currentYear - startYear;
-            document.getElementById('yearsCounter').textContent = yearsOfOperation + '+';
+            const yearsElement = document.getElementById('yearsCounter');
+            if (yearsElement) {
+                yearsElement.textContent = yearsOfOperation + '+';
+            }
         }
 
-        // Run when page loads
-        updateYearsCounter();
-    </script>
-     <script>
-        // Calculate and update student count
+        // Calculate student count
         function updateStudentCount() {
-            const baseYear = 1988; // Starting year
-            const baseCount = 90; // Base student count
+            const baseYear = 1988;
+            const baseCount = 90;
             const currentYear = new Date().getFullYear();
             const yearsPassed = currentYear - baseYear;
-            const additionalStudents = yearsPassed * 90; // 90 students per year
+            const additionalStudents = yearsPassed * 90;
             const totalStudents = baseCount + additionalStudents;
             
-            document.getElementById('StudentsCount').textContent = totalStudents + '+';
+            const studentsElement = document.getElementById('StudentsCount');
+            if (studentsElement) {
+                studentsElement.textContent = totalStudents + '+';
+            }
         }
 
-        // Run when page loads
+        // Run counters when page loads
+        updateYearsCounter();
         updateStudentCount();
+
+        // Form enhancement
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // Testimonial slider (simple version)
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        let currentTestimonial = 0;
+
+        function showNextTestimonial() {
+            testimonialCards[currentTestimonial].classList.remove('active');
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            testimonialCards[currentTestimonial].classList.add('active');
+        }
+
+        // Auto-rotate testimonials every 5 seconds
+        if (testimonialCards.length > 1) {
+            setInterval(showNextTestimonial, 5000);
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+        });
     </script>
-    
 </body>
 </html>
