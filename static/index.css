@@ -220,15 +220,16 @@ p {
 /* Header Styles */
 .header {
     position: fixed;
-    top: 0;
+    top: 20px;
     left: 0;
     right: 0;
     z-index: 1000;
     background: transparent;
     backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-normal);
-    padding: 1rem 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5rem 0;
+    transform: translateY(0);
 }
 
 .header.scrolled {
@@ -236,6 +237,16 @@ p {
     backdrop-filter: blur(25px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header.hide {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.header.show {
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .header .container {
@@ -251,8 +262,8 @@ p {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     transition: var(--transition-normal);
 }
 
@@ -362,6 +373,7 @@ p {
     align-items: center;
     background: var(--gradient-hero);
     overflow: hidden;
+    padding-top: 140px;
 }
 
 .hero::before {

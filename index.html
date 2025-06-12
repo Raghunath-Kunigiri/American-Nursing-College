@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>American College of Nursing - Excellence in Healthcare Education</title>
+    <title>American College of Nursing</title>
     
     <!-- Favicon and Web App Icons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="images/Logo.jpg">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/Logo.jpg">
-    <link rel="shortcut icon" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="180x180" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="152x152" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="144x144" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="120x120" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="76x76" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="60x60" href="images/Logo.jpg">
-    <link rel="apple-touch-icon" sizes="57x57" href="images/Logo.jpg">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/Logo1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/Logo1.png">
+    <link rel="shortcut icon" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/Logo1.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="images/Logo1.png">
     
     <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -31,7 +31,7 @@
     <meta name="revisit-after" content="7 days">
     <meta name="theme-color" content="#1e40af">
     <meta name="msapplication-TileColor" content="#1e40af">
-    <meta name="msapplication-TileImage" content="images/Logo.jpg">
+    <meta name="msapplication-TileImage" content="images/Logo1.png">
     <link rel="canonical" href="https://americancollegeofnursing.com/">
     
     <!-- Structured Data for SEO -->
@@ -42,7 +42,7 @@
         "name": "American College of Nursing",
         "alternateName": "ACN",
         "url": "https://americancollegeofnursing.com",
-        "logo": "https://americancollegeofnursing.com/images/Logo.jpg",
+        "logo": "https://americancollegeofnursing.com/images/Logo1.png",
         "description": "Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses since 1988.",
         "foundingDate": "1988",
         "address": {
@@ -71,14 +71,14 @@
     <meta property="og:url" content="https://americancollegeofnursing.com/">
     <meta property="og:title" content="American College of Nursing - Excellence in Healthcare Education">
     <meta property="og:description" content="Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses. Established 1988.">
-    <meta property="og:image" content="images/Logo.jpg">
+    <meta property="og:image" content="images/Logo1.png">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://americancollegeofnursing.com/">
     <meta property="twitter:title" content="American College of Nursing - Excellence in Healthcare Education">
     <meta property="twitter:description" content="Premier healthcare education institution offering GNM, BSc Nursing, and Paramedical courses. Established 1988.">
-    <meta property="twitter:image" content="images/Logo.jpg">
+    <meta property="twitter:image" content="images/Logo1.png">
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -92,7 +92,7 @@
     <header class="header" id="header">
         <div class="container">
         <div class="logo-container">
-                <img src="images/Logo.jpg" alt="ACN Logo" class="logo">
+                <img src="images/Logo4.png" alt="ACN Logo" class="logo">
                 <a href="#home" class="logo-text">ACN</a>
         </div>
         <div class="hamburger" id="hamburger">
@@ -751,7 +751,7 @@
             <div class="footer-content">
                 <div class="footer-section" data-aos="fade-up" data-aos-delay="100">
                     <div class="footer-logo">
-                        <img src="images/Logo.jpg" alt="ANC Logo" class="footer-logo-img">
+                        <img src="images/Logo1.jpg" alt="ANC Logo" class="footer-logo-img">
                         <h3>American College of Nursing</h3>
                     </div>
                     <p>Dedicated to excellence in healthcare education since 1988. Our mission is to prepare compassionate, skilled, and ethical healthcare professionals for tomorrow's challenges.</p>
@@ -1090,11 +1090,12 @@
             });
         });
 
-        // Enhanced Header Scroll Effect
+        // Enhanced Header Scroll Effect with Smooth Hide/Show
         let lastScroll = 0;
-        const scrollThreshold = 100;
+        const scrollThreshold = 80;
+        let ticking = false;
 
-        window.addEventListener('scroll', () => {
+        function updateHeader() {
             const currentScroll = window.pageYOffset;
 
             // Add scrolled class for styling
@@ -1105,16 +1106,32 @@
             }
 
             // Show/hide header based on scroll direction
-            if (currentScroll <= 0 || currentScroll < lastScroll) {
+            if (currentScroll <= 0) {
+                // At the top of the page
+                header.classList.remove('hide');
+                header.classList.add('show');
+            } else if (currentScroll < lastScroll) {
+                // Scrolling up - show header
                 header.classList.remove('hide');
                 header.classList.add('show');
             } else if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+                // Scrolling down and past threshold - hide header
                 header.classList.remove('show');
                 header.classList.add('hide');
             }
 
             lastScroll = currentScroll;
-        });
+            ticking = false;
+        }
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(updateHeader);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
