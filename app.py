@@ -6,6 +6,7 @@ import os
 from datetime import datetime
 import logging
 from dotenv import load_dotenv
+import csv
 
 # Import database connection and models
 from config.database import connect_db, disconnect_db
@@ -155,6 +156,48 @@ def ratelimit_handler(e):
 # Graceful shutdown
 import atexit
 atexit.register(disconnect_db)
+
+@app.route('/save-admission', methods=['POST'])
+def save_admission():
+    try:
+        data = request.get_json()
+        
+        # Prepare the data
+        admission_data = {
+            'Name': data.get('name', ''),
+            'Email': data.get('email', ''),
+            'Phone': data.get('phone', ''),
+            'Course': data.get('course', ''),
+            'Message': data.get('message', ''),
+            'Timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        }
+        
+        # Check if file exists to determine if we need to write headers
+        file_exists = os.path.isfile('admissions.csv')
+        
+        # Write to CSV
+        with open('admissions.csv', 'a', newline='', encoding='utf-8') as csvfile:
+            fieldnames = ['Name', 'Email', 'Phone', 'Course', 'Message', 'Timestamp']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            # Write headers if file is new
+            if not file_exists:
+                writer.writeheader()
+            
+            # Write the data
+            writer.writerow(admission_data)
+        
+        return jsonify({
+            'success': True,
+            'message': 'Application saved successfully'
+        }), 200
+        
+    except Exception as e:
+        print(f"Error saving admission: {str(e)}")
+        return jsonify({
+            'success': False,
+            'message': 'Failed to save application'
+        }), 500
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 3000))

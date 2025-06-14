@@ -110,10 +110,10 @@ class FormHandler {
 
     async setupAdmissionForm(form) {
         form.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            e.preventDefault(); // Prevent form from submitting traditionally
             
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
             
             try {
                 // Show loading state
@@ -122,60 +122,42 @@ class FormHandler {
 
                 // Collect form data
                 const formData = new FormData(form);
-                const applicationData = {
-                    firstName: formData.get('firstName'),
-                    lastName: formData.get('lastName'),
+                const data = {
+                    name: formData.get('name'),
                     email: formData.get('email'),
                     phone: formData.get('phone'),
-                    dateOfBirth: formData.get('dateOfBirth'),
-                    gender: formData.get('gender'),
-                    address: {
-                        street: formData.get('street'),
-                        city: formData.get('city'),
-                        state: formData.get('state'),
-                        zipCode: formData.get('zipCode'),
-                        country: formData.get('country') || 'India'
-                    },
-                    program: formData.get('program'),
-                    previousEducation: {
-                        qualification: formData.get('qualification'),
-                        institution: formData.get('institution'),
-                        yearOfCompletion: parseInt(formData.get('yearOfCompletion')),
-                        percentage: parseFloat(formData.get('percentage'))
-                    },
-                    admissionYear: parseInt(formData.get('admissionYear')),
-                    guardian: {
-                        name: formData.get('guardianName'),
-                        relationship: formData.get('guardianRelationship'),
-                        phone: formData.get('guardianPhone'),
-                        email: formData.get('guardianEmail')
-                    },
-                    medicalHistory: formData.get('medicalHistory'),
-                    specialNeeds: formData.get('specialNeeds'),
-                    motivation: formData.get('motivation')
+                    course: formData.get('course'),
+                    message: formData.get('message')
                 };
 
-                // Submit application
-                const response = await api.submitApplication(applicationData);
+                // Save to CSV
+                const response = await fetch('/save-admission', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
 
-                // Show success message
-                this.showMessage('success', response.message);
-                
-                // Store application ID for tracking
-                if (response.data && response.data.applicationId) {
-                    localStorage.setItem('applicationId', response.data.applicationId);
+                if (!response.ok) {
+                    throw new Error('Failed to save application');
                 }
 
+                const result = await response.json();
+                
+                // Show success message
+                this.showMessage('success', result.message || 'Application submitted successfully!');
+                
                 // Reset form
                 form.reset();
 
             } catch (error) {
                 console.error('Application submission failed:', error);
-                this.showMessage('error', error.message || 'Failed to submit application. Please try again.');
+                this.showMessage('error', 'Failed to submit application. Please try again.');
             } finally {
                 // Reset button state
                 submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
+                submitBtn.innerHTML = originalText;
             }
         });
 
@@ -298,33 +280,21 @@ class FormHandler {
     }
 
     showMessage(type, message) {
-        // Remove existing messages
-        const existingMessages = document.querySelectorAll('.api-message');
+        // Remove any existing messages
+        const existingMessages = document.querySelectorAll('.alert');
         existingMessages.forEach(msg => msg.remove());
 
-        // Create message element
         const messageDiv = document.createElement('div');
-        messageDiv.className = `api-message alert alert-${type === 'success' ? 'success' : 'danger'}`;
-        messageDiv.innerHTML = `
-            <div class="d-flex align-items-center">
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
-                <span>${message}</span>
-                <button type="button" class="btn-close ms-auto" onclick="this.parentElement.parentElement.remove()"></button>
-            </div>
-        `;
-
-        // Insert message at the top of the page
-        document.body.insertBefore(messageDiv, document.body.firstChild);
-
-        // Auto-remove after 5 seconds
+        messageDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
+        messageDiv.textContent = message;
+        
+        const form = document.getElementById('admissionForm');
+        form.parentNode.insertBefore(messageDiv, form);
+        
+        // Remove message after 5 seconds
         setTimeout(() => {
-            if (messageDiv.parentNode) {
-                messageDiv.remove();
-            }
+            messageDiv.remove();
         }, 5000);
-
-        // Scroll to top to show message
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     showFieldError(field, message) {
@@ -544,13 +514,13 @@ class ApplicationTracker {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize form handlers
-    window.formHandler = new FormHandler();
+    const formHandler = new FormHandler();
     
     // Initialize stats display
-    window.statsDisplay = new StatsDisplay();
+    const statsDisplay = new StatsDisplay();
     
     // Initialize application tracker
-    window.applicationTracker = new ApplicationTracker();
+    const applicationTracker = new ApplicationTracker();
 
     // Health check
     api.healthCheck().then(response => {
