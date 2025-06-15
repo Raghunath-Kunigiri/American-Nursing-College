@@ -18,7 +18,7 @@ def connect_db(mongodb_uri=None):
         # Use provided URI or default
         if not mongodb_uri:
             mongodb_uri = os.getenv('MONGODB_URI', 
-                'mongodb+srv://kunigiriraghunath9493:X3W7HJLG0HaCvQCG@acn.oa10h.mongodb.net/american_nursing_college?retryWrites=true&w=majority')
+                'mongodb+srv://kunigiriraghunath9493:GUd96cGu12jowTrR@acn.oa10h.mongodb.net/?retryWrites=true&w=majority&appName=ACN')
         
         # Create MongoDB client
         db_client = MongoClient(
@@ -33,10 +33,10 @@ def connect_db(mongodb_uri=None):
         db_client.admin.command('ping')
         
         # Get database name from URI or use default
-        if 'american_nursing_college' in mongodb_uri:
-            db_name = 'american_nursing_college'
+        if 'AmericanCollege' in mongodb_uri:
+            db_name = 'AmericanCollege'
         else:
-            db_name = 'american_nursing_college'
+            db_name = 'AmericanCollege'
             
         db = db_client[db_name]
         

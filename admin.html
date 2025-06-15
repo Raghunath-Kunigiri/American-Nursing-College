@@ -23,6 +23,45 @@
         .tab-content.active { display: block; }
         .preview-pane { max-height: 600px; overflow-y: auto; }
         .image-preview { max-width: 200px; max-height: 150px; object-fit: cover; }
+        
+        /* Custom header styling to match main website */
+        .admin-header {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-header h2 {
+            color: #1f2937;
+            font-weight: 600;
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .admin-header {
+                background: rgba(255, 255, 255, 0.15) !important;
+                backdrop-filter: blur(25px);
+            }
+            
+            .admin-header h2 {
+                color: #111827;
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Button styling to match transparency */
+        .admin-header button {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .admin-header button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -110,7 +149,7 @@
         <!-- Main Content -->
         <div id="mainContent" class="ml-64 content-transition">
             <!-- Header -->
-            <header class="bg-white shadow-sm border-b border-gray-200 p-4">
+            <header class="admin-header bg-transparent backdrop-blur-md border-b border-white/10 p-4 shadow-lg">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center">
                         <button id="sidebarToggle" class="lg:hidden mr-4 text-gray-600">
@@ -272,7 +311,130 @@
                     </div>
                 </div>
 
-                <!-- Other tabs will be added similarly -->
+                <!-- Admissions Section Tab -->
+                <div id="admissions-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-lg font-semibold">Admission Applications</h3>
+                            <div class="flex gap-2">
+                                <button id="refreshApplications" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                                    <i class="fas fa-refresh mr-2"></i>Refresh
+                                </button>
+                                <button id="exportApplications" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                                    <i class="fas fa-download mr-2"></i>Export CSV
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Search and Sort Controls -->
+                        <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <input type="text" id="searchApplications" placeholder="Search by name, email, phone, or application ID..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                            </div>
+                            <div class="flex gap-2">
+                                <select id="sortBy" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                                    <option value="date">Sort by Date</option>
+                                    <option value="name">Sort by Name</option>
+                                    <option value="status">Sort by Status</option>
+                                </select>
+                                <select id="sortOrder" class="px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500">
+                                    <option value="desc">Newest First</option>
+                                    <option value="asc">Oldest First</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full table-auto">
+                                <thead>
+                                    <tr class="bg-gray-50">
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Application ID</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="applicationsTableBody" class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td colspan="8" class="px-4 py-8 text-center text-gray-500">
+                                            <i class="fas fa-spinner fa-spin mr-2"></i>Loading applications...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div id="applicationsPagination" class="mt-4 flex justify-between items-center">
+                            <div class="text-sm text-gray-500">
+                                Showing <span id="showingStart">0</span> to <span id="showingEnd">0</span> of <span id="totalApplications">0</span> applications
+                            </div>
+                            <div class="flex gap-2">
+                                <button id="prevPage" class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Previous</button>
+                                <button id="nextPage" class="px-3 py-1 border border-gray-300 rounded text-sm hover:bg-gray-50">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Facilities Section Tab -->
+                <div id="facilities-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">Facilities Management</h3>
+                        <p class="text-gray-600">Manage campus facilities and infrastructure details.</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Section Tab -->
+                <div id="gallery-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">Gallery Management</h3>
+                        <p class="text-gray-600">Manage photo gallery and media content.</p>
+                    </div>
+                </div>
+
+                <!-- Testimonials Section Tab -->
+                <div id="testimonials-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">Testimonials Management</h3>
+                        <p class="text-gray-600">Manage student and alumni testimonials.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Section Tab -->
+                <div id="faq-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">FAQ Management</h3>
+                        <p class="text-gray-600">Manage frequently asked questions.</p>
+                    </div>
+                </div>
+
+                <!-- Contact Section Tab -->
+                <div id="contact-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">Contact Information</h3>
+                        <p class="text-gray-600">Manage contact details and information.</p>
+                    </div>
+                </div>
+
+                <!-- SEO Section Tab -->
+                <div id="seo-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">SEO Settings</h3>
+                        <p class="text-gray-600">Manage SEO metadata and optimization settings.</p>
+                    </div>
+                </div>
+
+                <!-- Footer Section Tab -->
+                <div id="footer-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold mb-4">Footer Management</h3>
+                        <p class="text-gray-600">Manage footer content and links.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

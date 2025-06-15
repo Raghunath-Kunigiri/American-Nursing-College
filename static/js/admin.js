@@ -188,6 +188,12 @@ let adminDashboard = {
         });
         document.getElementById(`${tabName}-tab`).classList.add('active');
 
+        // Load applications when admissions tab is accessed
+        if (tabName === 'admissions') {
+            this.loadApplications();
+            this.setupAdmissionsEventListeners();
+        }
+
         // Update page title
         const titles = {
             hero: 'Hero Section',
@@ -206,6 +212,11 @@ let adminDashboard = {
 
         this.currentTab = tabName;
         this.updatePreview(tabName);
+        
+        // Load specific content for admissions tab
+        if (tabName === 'admissions') {
+            this.loadApplications();
+        }
     },
 
     updatePreview(section) {
@@ -437,6 +448,297 @@ let adminDashboard = {
         notification.textContent = message;
         document.body.appendChild(notification);
         setTimeout(() => notification.remove(), 3000);
+    },
+
+    setupAdmissionsEventListeners() {
+        // Search input
+        const searchInput = document.getElementById('searchApplications');
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                this.loadApplications();
+            });
+        }
+
+        // Sort controls
+        const sortBy = document.getElementById('sortBy');
+        const sortOrder = document.getElementById('sortOrder');
+        
+        if (sortBy) {
+            sortBy.addEventListener('change', () => {
+                this.loadApplications();
+            });
+        }
+        
+        if (sortOrder) {
+            sortOrder.addEventListener('change', () => {
+                this.loadApplications();
+            });
+        }
+    },
+
+    async loadApplications() {
+        try {
+            // Get search and sort parameters
+            const searchQuery = document.getElementById('searchApplications')?.value || '';
+            const sortBy = document.getElementById('sortBy')?.value || 'date';
+            const sortOrder = document.getElementById('sortOrder')?.value || 'desc';
+            
+            // Build query parameters
+            const params = new URLSearchParams();
+            if (searchQuery.trim()) {
+                params.append('search', searchQuery.trim());
+            }
+            params.append('sort', sortBy);
+            params.append('order', sortOrder);
+            
+            const response = await fetch(`${window.location.origin}/api/applications?${params.toString()}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch applications');
+            }
+            
+            const data = await response.json();
+            this.displayApplications(data.data || []);
+            
+        } catch (error) {
+            console.error('Error loading applications:', error);
+            this.displayApplicationsError();
+        }
+    },
+
+    displayApplications(applications) {
+        const tbody = document.getElementById('applicationsTableBody');
+        const totalElement = document.getElementById('totalApplications');
+        
+        if (!tbody) return;
+        
+        // Update total count
+        if (totalElement) {
+            totalElement.textContent = applications.length;
+        }
+        
+        if (applications.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8" class="px-4 py-8 text-center text-gray-500">
+                        <i class="fas fa-inbox mr-2"></i>No applications found
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        tbody.innerHTML = applications.map(app => `
+            <tr class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-sm font-mono text-blue-600 font-medium" title="Application ID (Phone Number)">
+                    ${app._id || app.phone || 'N/A'}
+                </td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-900">${app.name || 'N/A'}</td>
+                <td class="px-4 py-3 text-sm text-gray-700">${app.email || 'N/A'}</td>
+                <td class="px-4 py-3 text-sm text-gray-700">${app.phone || 'N/A'}</td>
+                <td class="px-4 py-3 text-sm text-gray-700">${app.course || 'N/A'}</td>
+                <td class="px-4 py-3 text-sm text-gray-700">${this.formatDate(app.timestamp)}</td>
+                <td class="px-4 py-3">
+                    <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${this.getStatusClass(app.status)}">
+                        ${app.status || 'pending'}
+                    </span>
+                </td>
+                <td class="px-4 py-3 text-sm">
+                    <div class="flex gap-2">
+                        <button onclick="adminDashboard.viewApplication('${app._id}')" class="text-blue-600 hover:text-blue-800" title="View Details">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button onclick="adminDashboard.updateApplicationStatus('${app._id}', 'approved')" class="text-green-600 hover:text-green-800" title="Approve">
+                            <i class="fas fa-check"></i>
+                        </button>
+                        <button onclick="adminDashboard.updateApplicationStatus('${app._id}', 'rejected')" class="text-red-600 hover:text-red-800" title="Reject">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `).join('');
+
+        // Setup refresh button
+        const refreshBtn = document.getElementById('refreshApplications');
+        if (refreshBtn) {
+            refreshBtn.onclick = () => this.loadApplications();
+        }
+
+        // Setup export button
+        const exportBtn = document.getElementById('exportApplications');
+        if (exportBtn) {
+            exportBtn.onclick = () => this.exportApplications(applications);
+        }
+    },
+
+    displayApplicationsError() {
+        const tbody = document.getElementById('applicationsTableBody');
+        if (tbody) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="8" class="px-4 py-8 text-center text-red-500">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Failed to load applications. Please try again.
+                    </td>
+                </tr>
+            `;
+        }
+    },
+
+    formatDate(timestamp) {
+        if (!timestamp) return 'N/A';
+        const date = new Date(timestamp);
+        return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    },
+
+    getStatusClass(status) {
+        switch (status?.toLowerCase()) {
+            case 'approved': return 'bg-green-100 text-green-800';
+            case 'rejected': return 'bg-red-100 text-red-800';
+            case 'reviewed': return 'bg-yellow-100 text-yellow-800';
+            default: return 'bg-gray-100 text-gray-800';
+        }
+    },
+
+    async updateApplicationStatus(applicationId, status) {
+        try {
+            const response = await fetch(`${window.location.origin}/api/applications/${applicationId}/status`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ status })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update application status');
+            }
+
+            this.showNotification(`Application ${status} successfully`, 'success');
+            this.loadApplications(); // Refresh the list
+
+        } catch (error) {
+            console.error('Error updating application status:', error);
+            this.showNotification('Failed to update application status', 'error');
+        }
+    },
+
+    exportApplications(applications) {
+        if (!applications || applications.length === 0) {
+            this.showNotification('No applications to export', 'error');
+            return;
+        }
+
+        // Create CSV content
+        const headers = ['Application ID', 'Name', 'Email', 'Phone', 'Course', 'Message', 'Date', 'Status'];
+        const csvContent = [
+            headers.join(','),
+            ...applications.map(app => [
+                `"${app._id || ''}"`,
+                `"${app.name || ''}"`,
+                `"${app.email || ''}"`,
+                `"${app.phone || ''}"`,
+                `"${app.course || ''}"`,
+                `"${app.message || ''}"`,
+                `"${this.formatDate(app.timestamp)}"`,
+                `"${app.status || 'pending'}"`
+            ].join(','))
+        ].join('\n');
+
+        // Create and download file
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `applications_${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+
+        this.showNotification('Applications exported successfully', 'success');
+    },
+
+    viewApplication(applicationId) {
+        // Find the application in the current data
+        fetch(window.location.origin + '/api/applications')
+            .then(response => response.json())
+            .then(data => {
+                const application = data.data.find(app => app._id === applicationId);
+                if (application) {
+                    this.showApplicationModal(application);
+                } else {
+                    this.showNotification('Application not found', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching application details:', error);
+                this.showNotification('Failed to load application details', 'error');
+            });
+    },
+
+    showApplicationModal(application) {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        modal.innerHTML = `
+            <div class="bg-white w-full max-w-2xl mx-4 rounded-lg shadow-xl overflow-hidden">
+                <div class="flex justify-between items-center p-6 border-b">
+                    <h3 class="text-xl font-semibold">Application Details</h3>
+                    <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Application ID</label>
+                        <p class="text-blue-600 font-mono font-semibold text-lg">${application._id || 'N/A'}</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <p class="text-gray-900">${application.name || 'N/A'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <p class="text-gray-900">${application.email || 'N/A'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                            <p class="text-gray-900">${application.phone || 'N/A'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Course</label>
+                            <p class="text-gray-900">${application.course || 'N/A'}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Application Date</label>
+                            <p class="text-gray-900">${this.formatDate(application.timestamp)}</p>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${this.getStatusClass(application.status)}">
+                                ${application.status || 'pending'}
+                            </span>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <p class="text-gray-900 bg-gray-50 p-3 rounded-lg">${application.message || 'No message provided'}</p>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex gap-3">
+                        <button onclick="adminDashboard.updateApplicationStatus('${application._id}', 'approved'); this.closest('.fixed').remove();" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                            <i class="fas fa-check mr-2"></i>Approve
+                        </button>
+                        <button onclick="adminDashboard.updateApplicationStatus('${application._id}', 'rejected'); this.closest('.fixed').remove();" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                            <i class="fas fa-times mr-2"></i>Reject
+                        </button>
+                        <button onclick="this.closest('.fixed').remove()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
     }
 };
 
@@ -464,7 +766,63 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+document.addEventListener("DOMContentLoaded", function () {
+    // Login
+    const loginForm = document.getElementById("loginForm");
+    const loginModal = document.getElementById("loginModal");
+    const dashboard = document.getElementById("dashboard");
+    const loginError = document.getElementById("loginError");
+
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        if (username === "admin" && password === "admin123") {
+            loginModal.classList.add("hidden");
+            dashboard.classList.remove("hidden");
+        } else {
+            loginError.textContent = "Invalid credentials. Try admin/admin123.";
+            loginError.classList.remove("hidden");
+        }
+    });
+
+    // Tabs
+    const navItems = document.querySelectorAll(".nav-item");
+    const tabContents = document.querySelectorAll(".tab-content");
+    const pageTitle = document.getElementById("pageTitle");
+
+    navItems.forEach(item => {
+        item.addEventListener("click", function (e) {
+            e.preventDefault();
+            const tab = this.getAttribute("data-tab");
+            navItems.forEach(i => i.classList.remove("bg-gray-900"));
+            this.classList.add("bg-gray-900");
+
+            tabContents.forEach(tc => tc.classList.remove("active"));
+            document.getElementById(`${tab}-tab`).classList.add("active");
+            pageTitle.textContent = this.textContent.trim();
+        });
+    });
+
+    // Preview Modal
+    const previewBtn = document.getElementById("previewBtn");
+    const previewModal = document.getElementById("previewModal");
+    const closePreview = document.getElementById("closePreview");
+    const previewFrame = document.getElementById("previewFrame");
+
+    previewBtn.addEventListener("click", () => {
+        previewFrame.src = "/";
+        previewModal.classList.remove("hidden");
+    });
+
+    closePreview.addEventListener("click", () => {
+        previewModal.classList.add("hidden");
+    });
+});
+
+
 // Initialize the dashboard when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     adminDashboard.init();
+
 }); 

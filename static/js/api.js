@@ -116,6 +116,40 @@ class FormHandler {
             const originalText = submitBtn.innerHTML;
             
             try {
+                // Validate required fields
+                const name = form.querySelector('input[name="name"]').value.trim();
+                const phone = form.querySelector('input[name="phone"]').value.trim();
+                const course = form.querySelector('select[name="course"]').value;
+                
+                // Clear any existing error messages
+                this.clearAllErrors(form);
+                
+                let hasErrors = false;
+                
+                if (!name) {
+                    this.showFieldError(form.querySelector('input[name="name"]'), 'Full Name is required');
+                    hasErrors = true;
+                }
+                
+                if (!phone) {
+                    this.showFieldError(form.querySelector('input[name="phone"]'), 'Phone Number is required');
+                    hasErrors = true;
+                } else if (!/^[\+]?[0-9\s\-\(\)]{10,15}$/.test(phone)) {
+                    this.showFieldError(form.querySelector('input[name="phone"]'), 'Please enter a valid phone number');
+                    hasErrors = true;
+                }
+                
+                if (!course) {
+                    this.showFieldError(form.querySelector('select[name="course"]'), 'Please select a course');
+                    hasErrors = true;
+                }
+                
+                
+                
+                if (hasErrors) {
+                    return;
+                }
+                
                 // Show loading state
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
@@ -131,7 +165,7 @@ class FormHandler {
                 };
 
                 // Save to MongoDB
-                const response = await fetch('/save-admission', {
+                const response = await fetch(window.location.origin + '/save-admission', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -139,21 +173,42 @@ class FormHandler {
                     body: JSON.stringify(data)
                 });
 
-                if (!response.ok) {
-                    throw new Error('Failed to save application');
+                if (!response.ok) { 
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || 'Failed to save application');
                 }
 
                 const result = await response.json();
                 
-                // Show success message with application ID
-                this.showMessage('success', `
-                    Application submitted successfully!<br>
-                    Your Application ID: <strong>${result.applicationId}</strong><br>
-                    Please save this ID for future reference.
-                `);
+                // Store application data for printing
+                const applicationData = {
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    course: data.course,
+                    applicationId: result.applicationId,
+                    submissionDate: new Date().toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'   
+                    })
+                };
+                
+                // Show success message and application details card
+                this.showApplicationCard(applicationData);
                 
                 // Reset form
                 form.reset();
+                
+                // Scroll to the success message
+                setTimeout(() => {
+                    const alertMessage = document.querySelector('.alert-success');
+                    if (alertMessage) {
+                        alertMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }, 100);
 
             } catch (error) {
                 console.error('Application submission failed:', error);
@@ -283,6 +338,82 @@ class FormHandler {
         }
     }
 
+    showApplicationCard(applicationData) {
+        // Remove any existing messages or cards
+        const existingMessages = document.querySelectorAll('.alert, .application-card');
+        existingMessages.forEach(msg => msg.remove());
+
+        const cardDiv = document.createElement('div');
+        cardDiv.className = 'application-card';
+        cardDiv.innerHTML = `
+            <div class="card shadow-lg border-0" style="max-width: 600px; margin: 20px auto;">
+                <div class="card-header bg-success text-white text-center">
+                    <h4 class="mb-0"><i class="fas fa-check-circle"></i> Application Submitted Successfully!</h4>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="alert alert-info">
+                            <strong>Application ID: ${applicationData.applicationId}</strong><br>
+                <small class="text-muted">(Your phone number is your Application ID)</small><br>
+                            <small>Please save this ID for future reference</small>
+                        </div>
+                    </div>
+                    
+                    <h5 class="card-title text-center mb-4">Application Details</h5>
+                    
+                    <div class="application-details-table">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 35%; background-color: #f8f9fa;">Full Name</th>
+                                    <td>${applicationData.name}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8f9fa;">Email Address</th>
+                                    <td>${applicationData.email}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8f9fa;">Phone Number</th>
+                                    <td>${applicationData.phone}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8f9fa;">Course Applied</th>
+                                    <td>${applicationData.course}</td>
+                                </tr>
+                                <tr>
+                                    <th style="background-color: #f8f9fa;">Submission Date</th>
+                                    <td>${applicationData.submissionDate}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary me-2" onclick="printApplicationCard()">
+                            <i class="fas fa-print"></i> Print Details
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="closeApplicationCard()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Important:</strong> Our admissions team will contact you within 24-48 hours. Please keep your Application ID safe for future reference.
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const form = document.getElementById('admissionForm');
+        form.parentNode.insertBefore(cardDiv, form);
+        
+        // Scroll to the card
+        setTimeout(() => {
+            cardDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    }
+
     showMessage(type, message) {
         // Remove any existing messages
         const existingMessages = document.querySelectorAll('.alert');
@@ -324,6 +455,16 @@ class FormHandler {
         if (existingError) {
             existingError.remove();
         }
+    }
+
+    clearAllErrors(form) {
+        // Remove all error styling
+        const errorFields = form.querySelectorAll('.is-invalid');
+        errorFields.forEach(field => field.classList.remove('is-invalid'));
+        
+        // Remove all error messages
+        const errorMessages = form.querySelectorAll('.field-error');
+        errorMessages.forEach(msg => msg.remove());
     }
 }
 
@@ -518,6 +659,194 @@ class ApplicationTracker {
             'Waitlisted': 'secondary'
         };
         return colors[status] || 'secondary';
+    }
+}
+
+// Print application card function
+function printApplicationCard() {
+    try {
+        const applicationCard = document.querySelector('.application-card');
+        if (!applicationCard) {
+            alert('No application details found to print.');
+            return;
+        }
+        
+        // Get the application data from the card
+        const table = applicationCard.querySelector('table');
+        const rows = table.querySelectorAll('tbody tr');
+        const applicationId = applicationCard.querySelector('.alert-info strong').textContent.replace('Application ID: ', '');
+        
+        const applicationData = {
+            applicationId: applicationId,
+            name: rows[0].querySelector('td').textContent,
+            email: rows[1].querySelector('td').textContent,
+            phone: rows[2].querySelector('td').textContent,
+            course: rows[3].querySelector('td').textContent,
+            submissionDate: rows[4].querySelector('td').textContent
+        };
+        
+        // Create a new window for printing
+        const printWindow = window.open('', '_blank', 'width=800,height=600');
+        
+        const printContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Application Details - American College of Nursing</title>
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        max-width: 800px;
+                        margin: 0 auto;
+                        padding: 20px;
+                        line-height: 1.6;
+                    }
+                    .header {
+                        text-align: center;
+                        border-bottom: 2px solid #2c5aa0;
+                        padding-bottom: 20px;
+                        margin-bottom: 30px;
+                    }
+                    .logo {
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #2c5aa0;
+                        margin-bottom: 10px;
+                    }
+                    .college-name {
+                        font-size: 20px;
+                        color: #333;
+                        margin-bottom: 5px;
+                    }
+                    .address {
+                        font-size: 14px;
+                        color: #666;
+                    }
+                    .application-title {
+                        text-align: center;
+                        font-size: 22px;
+                        font-weight: bold;
+                        color: #2c5aa0;
+                        margin: 30px 0;
+                        text-transform: uppercase;
+                    }
+                    .details-table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                    }
+                    .details-table th,
+                    .details-table td {
+                        border: 1px solid #ddd;
+                        padding: 12px;
+                        text-align: left;
+                    }
+                    .details-table th {
+                        background-color: #f8f9fa;
+                        font-weight: bold;
+                        color: #2c5aa0;
+                        width: 30%;
+                    }
+                    .application-id {
+                        background-color: #e3f2fd;
+                        font-weight: bold;
+                        font-size: 16px;
+                    }
+                    .footer {
+                        margin-top: 40px;
+                        padding-top: 20px;
+                        border-top: 1px solid #ddd;
+                        text-align: center;
+                        font-size: 12px;
+                        color: #666;
+                    }
+                    .important-note {
+                        background-color: #fff3cd;
+                        border: 1px solid #ffeaa7;
+                        padding: 15px;
+                        margin: 20px 0;
+                        border-radius: 5px;
+                    }
+                    @media print {
+                        body { margin: 0; }
+                        .no-print { display: none; }
+                    }
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <div class="logo">🏥 ACN</div>
+                    <div class="college-name">American College of Nursing</div>
+                    <div class="address">
+                        Balaji Villas, Kalyana Durgam Road<br>
+                        Anantapur, Andhra Pradesh 515004<br>
+                        Phone: +91 70133 70612, +91 99899 53273<br>
+                        Email: Americancollegeatp@gmail.com
+                    </div>
+                </div>
+                
+                <div class="application-title">Admission Application Receipt</div>
+                
+                <table class="details-table">
+                    <tr>
+                        <th>Application ID</th>
+                        <td class="application-id">${applicationData.applicationId}</td>
+                    </tr>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>${applicationData.name}</td>
+                    </tr>
+                    <tr>
+                        <th>Email Address</th>
+                        <td>${applicationData.email}</td>
+                    </tr>
+                    <tr>
+                        <th>Phone Number</th>
+                        <td>${applicationData.phone}</td>
+                    </tr>
+                    <tr>
+                        <th>Course Applied</th>
+                        <td>${applicationData.course}</td>
+                    </tr>
+                    <tr>
+                        <th>Submission Date</th>
+                        <td>${applicationData.submissionDate}</td>
+                    </tr>
+                </table>
+                
+                <div class="important-note">
+                    <strong>Important:</strong> Please keep this receipt for your records. Your Application ID is required for tracking your application status. Our admissions team will contact you within 24-48 hours.
+                </div>
+                
+                <div class="footer">
+                    <p>This is a computer-generated receipt. No signature required.</p>
+                    <p>© 2024 American College of Nursing. All rights reserved.</p>
+                    <p>Printed on: ${new Date().toLocaleString('en-IN')}</p>
+                </div>
+                
+                <script>
+                    window.onload = function() {
+                        window.print();
+                    }
+                </script>
+            </body>
+            </html>
+        `;
+        
+        printWindow.document.write(printContent);
+        printWindow.document.close();
+        
+    } catch (error) {
+        console.error('Error printing application details:', error);
+        alert('Error preparing print document. Please try again.');
+    }
+}
+
+// Close application card function
+function closeApplicationCard() {
+    const applicationCard = document.querySelector('.application-card');
+    if (applicationCard) {
+        applicationCard.remove();
     }
 }
 

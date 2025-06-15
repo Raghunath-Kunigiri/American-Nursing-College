@@ -1,0 +1,102 @@
+[
+  {
+    "_id": "c41ec7ba-c0d4-42d6-86c1-0c2be4a7464c",
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "1234567890",
+    "course": "BSN",
+    "message": "Test application",
+    "timestamp": "2025-06-15T12:51:03.255797",
+    "status": "pending"
+  },
+  {
+    "_id": "22a996e8-8f6b-4337-a15f-14c5157974cd",
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "1234567890",
+    "course": "BSN",
+    "message": "Test application",
+    "timestamp": "2025-06-15T12:51:34.310402",
+    "status": "pending"
+  },
+  {
+    "_id": "76b3e59a-6632-47e6-8cd7-850b0ee4e4fd",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "9876543210",
+    "course": "RN",
+    "message": "I want to apply for nursing program",
+    "timestamp": "2025-06-15T12:54:03.656674",
+    "status": "rejected"
+  },
+  {
+    "name": "Raghunath Kunigiri",
+    "email": "Kunigiriraghunath9493@gmail.com",
+    "phone": "3142246991",
+    "course": "Paramedical Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:28:59.170756",
+    "status": "pending",
+    "_id": "1d733231-c009-4f47-b42a-a45d631798cf"
+  },
+  {
+    "name": "Raghunath Kunigiri",
+    "email": "Kunigiriraghunath9473@gmail.com",
+    "phone": "3142246991",
+    "course": "Bachelor in Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:35:40.933994",
+    "status": "pending",
+    "_id": "b5bec92d-f622-48c5-8ad0-4ee340da43a8"
+  },
+  {
+    "name": "Raghunath Kunigiri",
+    "email": "kunigiriraghunath9493@gmail.com",
+    "phone": "08639243535",
+    "course": "Paramedical Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:35:56.903132",
+    "status": "pending",
+    "_id": "35e877cc-7c82-43bb-b7ca-3682ba6bd026"
+  },
+  {
+    "name": "Raghunath Kunigiri",
+    "email": "kunigiriraghunath9493@gmail.com",
+    "phone": "08639243535",
+    "course": "Paramedical Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:35:56.910128",
+    "status": "pending",
+    "_id": "d4baa487-98fc-473c-ba9d-cb09390787ff"
+  },
+  {
+    "name": "Raghunath Kunigiri",
+    "email": "Kunigiriraghunwqath9493@gmail.com",
+    "phone": "3142246991",
+    "course": "Paramedical Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:38:56.813160",
+    "status": "pending",
+    "_id": "25685b55-dab0-44ef-b169-28ef7d248154"
+  },
+  {
+    "_id": "13142246991",
+    "name": "Raghunath Kunigiri",
+    "email": "Raghunath.kunigiri@slu.edu",
+    "phone": "13142246991",
+    "course": "Paramedical Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T15:55:43.340734",
+    "status": "pending"
+  },
+  {
+    "_id": "3412246991",
+    "name": "Raghunath Kunigiri",
+    "email": "Raghunath.kunigirsi@slu.edu",
+    "phone": "3412246991",
+    "course": "General Nursing",
+    "message": "",
+    "timestamp": "2025-06-15T16:08:46.389353",
+    "status": "pending"
+  }
+]
