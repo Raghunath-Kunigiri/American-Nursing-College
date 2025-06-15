@@ -1,0 +1,123 @@
+/* Form Styles - Override conflicting styles */
+.admission-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.admission-form {
+    flex: 1;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admission-info {
+    flex: 1;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Override conflicting form-group styles */
+.admission-form .form-group {
+    flex: 1;
+    margin-bottom: 1.5rem;
+    position: static !important;
+}
+
+/* Override conflicting form-control styles */
+.admission-form .form-control {
+    width: 100% !important;
+    padding: 0.75rem !important;
+    border: 1px solid #ddd !important;
+    border-radius: 5px !important;
+    font-size: 1rem !important;
+    transition: border-color 0.3s ease !important;
+    background: #fff !important;
+    margin-top: 0 !important;
+}
+
+.admission-form .form-control:focus {
+    border-color: #1e40af !important;
+    outline: none !important;
+    box-shadow: 0 0 0 2px rgba(30, 64, 175, 0.2) !important;
+}
+
+/* Override conflicting label styles */
+.admission-form label {
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+    font-weight: 500 !important;
+    color: #333 !important;
+    position: static !important;
+    z-index: auto !important;
+    transform: none !important;
+    font-size: 1rem !important;
+    top: auto !important;
+    left: auto !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+/* Override select specific styles */
+.admission-form select.form-control {
+    appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 1rem center !important;
+    padding-right: 2.5rem !important;
+    height: 45px !important;
+    background-color: #fff !important;
+}
+
+.admission-form textarea.form-control {
+    min-height: 100px !important;
+    resize: vertical !important;
+}
+
+.form-submit {
+    width: 100%;
+    padding: 1rem;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover {
+    background: #1e3a8a;
+}
+
+/* Style for the placeholder option */
+select.form-control option[value=""] {
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .admission-container {
+        flex-direction: column;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+}

@@ -86,6 +86,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="static/index.css">
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
     <!-- Modern Header -->
@@ -552,18 +553,16 @@
             <div class="admission-container">
                 <div class="admission-form" data-aos="slide-right">
                     <h3>Apply Now</h3>
-                    <form id="admissionForm" class="enhanced-form" onsubmit="return false;">
+                    <form id="admissionForm" class="enhanced-form">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Full Name</label>
                                 <input type="text" id="name" name="name" class="form-control" required>
-                                <span class="form-bar"></span>
                             </div>
                             
                             <div class="form-group">
                                 <label for="email">Email Address</label>
                                 <input type="email" id="email" name="email" class="form-control" required>
-                                <span class="form-bar"></span>
                             </div>
                         </div>
                         
@@ -571,7 +570,6 @@
                             <div class="form-group">
                                 <label for="phone">Phone Number</label>
                                 <input type="tel" id="phone" name="phone" class="form-control" required>
-                                <span class="form-bar"></span>
                             </div>
                             
                             <div class="form-group">
@@ -585,14 +583,12 @@
                                     <option value="Cardiology Technician">Cardiology Technician</option>
                                     <option value="Multipurpose Health Assistant">Multipurpose Health Assistant</option>
                                 </select>
-                                <span class="form-bar"></span>
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="message">Additional Information</label>
                             <textarea id="message" name="message" class="form-control" rows="4"></textarea>
-                            <span class="form-bar"></span>
                         </div>
                         
                         <button type="submit" class="form-submit" id="submitBtn">
@@ -694,64 +690,205 @@
         </div>
     </section>
 
-    <!-- Enhanced Contact Section -->
-    <section id="contact" class="contact-section" data-aos="fade-up">
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
         <div class="container">
-            <h2>Contact Us</h2>
-            <p>We're here to answer any questions you may have about our programs or admission process.</p>
-            
-            <div class="contact-container">
-                <div class="contact-info" data-aos="slide-right">
-                    <h3>Get in Touch</h3>
-                    
-                    <div class="contact-details">
-                        <a href="tel:+917013370612" class="contact-button">
-                            <i class="fas fa-phone"></i>
-                            <div class="contact-text">
-                                <h4>Call Us</h4>
-                                <p>+91 7013370612, +91 9989953273</p>
-                            </div>
-                        </a>
+            <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+            <div class="row">
+                <div class="col-md-6" data-aos="fade-right">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <p>Have questions about our programs or want to learn more? We're here to help!</p>
                         
-                        <a href="mailto:Schoolofnursing10@gmail.com" class="contact-button">
-                            <i class="fas fa-envelope"></i>
-                            <div class="contact-text">
-                                <h4>Email Us</h4>
-                                <p>Schoolofnursing10@gmail.com</p>
+                        <div class="contact-details">
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p>
+                                        <a href="https://maps.app.goo.gl/dd2vSjdpd3iEM7c77" target="_blank" class="contact-link">
+                                            Balaji Villas, Kalyana Durgam Road<br>
+                                            Anantapur, Andhra Pradesh 515004<br>
+                                            India
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
-                        </a>
-                        
-                        <a href="https://maps.app.goo.gl/xkCScQLCrkHDZUVH9" target="_blank" class="contact-button">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div class="contact-text">
-                                <h4>Visit Us</h4>
-                                <p>Balaji Villas, Kalyana Durgam Road<br>Andhra Pradesh 515004, India</p>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Phone</h4>
+                                    <p>
+                                        <a href="tel:+917013370612" class="contact-link">+91 70133 70612</a><br>
+                                        <a href="tel:+919989953273" class="contact-link">+91 99899 53273</a>
+                                    </p>
+                                </div>
                             </div>
-                        </a>
-                        
-                        <div class="contact-button">
-                            <i class="fas fa-clock"></i>
-                            <div class="contact-text">
-                                <h4>Office Hours</h4>
-                                <p>Monday to Saturday<br>9:00 AM - 5:00 PM</p>
+                            
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>
+                                        <a href="mailto:Americancollegeatp@gmail.com" class="contact-link">
+                                            Americancollegeatp@gmail.com
+                                        </a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-map" data-aos="slide-left">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.026693387162!2d77.5627286!3d14.680629!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb14acaafe65bd7%3A0xb594966a4f158988!2sAmerican%20College%20Of%20Nursing!5e0!3m2!1sen!2sin!4v1689078357642!5m2!1sen!2sin" 
-                        width="100%" 
-                        height="450" 
-                        style="border:0; border-radius: 15px;" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
+                <div class="col-md-6" data-aos="fade-left">
+                    <div class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" required>
+                                <label for="name">Full Name</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" required>
+                                <label for="email">Email Address</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="tel" id="phone" name="phone" required>
+                                <label for="phone">Phone Number</label>
+                            </div>
+                            
+                            <div class="form-group">
+                                <select id="inquiry" name="inquiry" required>
+                                    <option value="">Select Inquiry Type</option>
+                                    <option value="admission">Admission Inquiry</option>
+                                    <option value="program">Program Information</option>
+                                    <option value="financial">Financial Aid</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <textarea id="message" name="message" required></textarea>
+                                <label for="message">Your Message</label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="row mt-5">
+                <div class="col-12" data-aos="fade-up">
+                    <div class="map-container">
+                        <div id="map"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+    <!-- Map Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                // Initialize the map with the correct coordinates
+                const map = L.map('map').setView([14.680629, 77.5601537], 15);
+
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Add a marker at the exact location
+                const marker = L.marker([14.680629, 77.5601537]).addTo(map);
+
+                // Add popup with the correct address and clickable links
+                marker.bindPopup(`
+                    <div class="map-popup">
+                        <h4>American Nursing Institutions</h4>
+                        <p>
+                            <a href="https://maps.app.goo.gl/dd2vSjdpd3iEM7c77" target="_blank" class="contact-link">
+                                Balaji Villas, Kalyana Durgam Road<br>
+                                Anantapur, Andhra Pradesh 515004<br>
+                                India
+                            </a>
+                        </p>
+                        <div class="popup-contact-links">
+                            <a href="tel:+917013370612" class="contact-link">
+                                <i class="fas fa-phone"></i> +91 70133 70612
+                            </a>
+                            <a href="tel:+919989953273" class="contact-link">
+                                <i class="fas fa-phone"></i> +91 99899 53273
+                            </a>
+                            <a href="mailto:Americancollegeatp@gmail.com" class="contact-link">
+                                <i class="fas fa-envelope"></i> Americancollegeatp@gmail.com
+                            </a>
+                        </div>
+                    </div>
+                `);
+
+                // Add custom icon
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: '<i class="fas fa-map-marker-alt"></i>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 30]
+                });
+
+                marker.setIcon(customIcon);
+
+            } catch (error) {
+                console.error('Error initializing map:', error);
+                showMapError(error.message);
+            }
+        });
+
+        function showMapError(errorMessage = '') {
+            const mapContainer = document.getElementById('map');
+            if (!mapContainer) return;
+
+            mapContainer.innerHTML = `
+                <div class="map-error">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Map Loading Failed</h4>
+                    <p>We're unable to load the map at this time. This might be due to:</p>
+                    <ul>
+                        <li>Internet connection issues</li>
+                        <li>Temporary service disruption</li>
+                        ${errorMessage ? `<li>Error: ${errorMessage}</li>` : ''}
+                    </ul>
+                    <p>You can still find us at:</p>
+                    <address>
+                        <a href="https://maps.app.goo.gl/dd2vSjdpd3iEM7c77" target="_blank" class="contact-link">
+                            American Nursing Institutions<br>
+                            Balaji Villas, Kalyana Durgam Road<br>
+                            Anantapur, Andhra Pradesh 515004<br>
+                            India
+                        </a>
+                    </address>
+                </div>
+            `;
+        }
+    </script>
 
     <!-- Enhanced Footer -->
     <footer class="footer">
@@ -1234,77 +1371,6 @@
         window.addEventListener('load', () => {
             document.body.classList.add('loaded');
         });
-
-        // Google Maps API
-        function initMap() {
-            try {
-                const location = { lat: 40.7128, lng: -74.0060 }; // Default to New York coordinates
-                const map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 15,
-                    center: location,
-                    mapTypeControl: false,
-                    streetViewControl: false,
-                    fullscreenControl: false
-                });
-
-                const marker = new google.maps.Marker({
-                    position: location,
-                    map: map,
-                    title: 'American Nursing Institutions'
-                });
-            } catch (error) {
-                console.error('Error initializing map:', error);
-                showMapError();
-            }
-        }
-
-        function onApiLoad() {
-            try {
-                initMap();
-            } catch (error) {
-                console.error('Error loading Maps API:', error);
-                showMapError();
-            }
-        }
-
-        function showMapError() {
-            const mapContainer = document.getElementById('map');
-            mapContainer.innerHTML = `
-                <div class="map-error">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h4>Map Loading Failed</h4>
-                    <p>We're unable to load the map at this time. This might be due to:</p>
-                    <ul>
-                        <li>An ad blocker or privacy extension blocking the map</li>
-                        <li>Internet connection issues</li>
-                        <li>Temporary service disruption</li>
-                    </ul>
-                    <p>You can still find us at:</p>
-                    <address>
-                        American Nursing Institutions<br>
-                        123 Medical Center Drive<br>
-                        New York, NY 10001<br>
-                        United States
-                    </address>
-                </div>
-            `;
-        }
-
-        // Check if Google Maps is blocked
-        function checkMapsAvailability() {
-            const testImage = new Image();
-            testImage.onerror = function() {
-                showMapError();
-            };
-            testImage.src = 'https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true';
-        }
-
-        // Run check when page loads
-        window.addEventListener('load', checkMapsAvailability);
-    </script>
-    <script async
-        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=onApiLoad&loading=async&libraries=places"
-        onerror="showMapError()">
     </script>
 </body>
 </html>

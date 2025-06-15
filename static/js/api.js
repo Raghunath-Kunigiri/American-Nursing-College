@@ -110,7 +110,7 @@ class FormHandler {
 
     async setupAdmissionForm(form) {
         form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent form from submitting traditionally
+            e.preventDefault();
             
             const submitBtn = document.getElementById('submitBtn');
             const originalText = submitBtn.innerHTML;
@@ -130,7 +130,7 @@ class FormHandler {
                     message: formData.get('message')
                 };
 
-                // Save to CSV
+                // Save to MongoDB
                 const response = await fetch('/save-admission', {
                     method: 'POST',
                     headers: {
@@ -145,8 +145,12 @@ class FormHandler {
 
                 const result = await response.json();
                 
-                // Show success message
-                this.showMessage('success', result.message || 'Application submitted successfully!');
+                // Show success message with application ID
+                this.showMessage('success', `
+                    Application submitted successfully!<br>
+                    Your Application ID: <strong>${result.applicationId}</strong><br>
+                    Please save this ID for future reference.
+                `);
                 
                 // Reset form
                 form.reset();
@@ -286,15 +290,21 @@ class FormHandler {
 
         const messageDiv = document.createElement('div');
         messageDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
-        messageDiv.textContent = message;
+        messageDiv.innerHTML = `
+            <div class="alert-content">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
         
         const form = document.getElementById('admissionForm');
         form.parentNode.insertBefore(messageDiv, form);
         
-        // Remove message after 5 seconds
+        // Remove message after 8 seconds for success (to give time to copy ID)
+        // and 5 seconds for error
         setTimeout(() => {
             messageDiv.remove();
-        }, 5000);
+        }, type === 'success' ? 8000 : 5000);
     }
 
     showFieldError(field, message) {

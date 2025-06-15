@@ -7,6 +7,9 @@ from datetime import datetime
 import logging
 from dotenv import load_dotenv
 import csv
+from pymongo import MongoClient
+from bson import ObjectId
+import json
 
 # Import database connection and models
 from config.database import connect_db, disconnect_db
@@ -24,13 +27,13 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuration
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key-change-in-production')
-app.config['MONGODB_URI'] = os.getenv('MONGODB_URI', 'mongodb+srv://kunigiriraghunath9493:X3W7HJLG0HaCvQCG@acn.oa10h.mongodb.net/american_nursing_college?retryWrites=true&w=majority')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['MONGODB_URI'] = os.getenv('MONGODB_URI')
 
 # CORS configuration
-cors_origins = ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:5500']
+cors_origins = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://127.0.0.1:3000,http://localhost:5500').split(',')
 if os.getenv('NODE_ENV') == 'production':
-    cors_origins = ['https://your-domain.com']  # Replace with your actual domain
+    cors_origins = [os.getenv('PRODUCTION_DOMAIN')]
 
 CORS(app, origins=cors_origins, supports_credentials=True)
 
@@ -157,6 +160,20 @@ def ratelimit_handler(e):
 import atexit
 atexit.register(disconnect_db)
 
+# MongoDB Connection
+client = MongoClient(os.getenv('MONGODB_URI'))
+db = client['acn_database']
+admissions_collection = db['admissions']
+
+# Custom JSON encoder for MongoDB ObjectId
+class MongoJSONEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ObjectId):
+            return str(obj)
+        return super().default(obj)
+
+app.json_encoder = MongoJSONEncoder
+
 @app.route('/save-admission', methods=['POST'])
 def save_admission():
     try:
@@ -164,32 +181,40 @@ def save_admission():
         
         # Prepare the data
         admission_data = {
-            'Name': data.get('name', ''),
-            'Email': data.get('email', ''),
-            'Phone': data.get('phone', ''),
-            'Course': data.get('course', ''),
-            'Message': data.get('message', ''),
-            'Timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'name': data.get('name', ''),
+            'email': data.get('email', ''),
+            'phone': data.get('phone', ''),
+            'course': data.get('course', ''),
+            'message': data.get('message', ''),
+            'timestamp': datetime.now(),
+            'status': 'pending'  # Initial status
         }
         
-        # Check if file exists to determine if we need to write headers
-        file_exists = os.path.isfile('admissions.csv')
+        # Save to MongoDB
+        result = admissions_collection.insert_one(admission_data)
         
-        # Write to CSV
+        # Also save to CSV for backup
+        file_exists = os.path.isfile('admissions.csv')
         with open('admissions.csv', 'a', newline='', encoding='utf-8') as csvfile:
             fieldnames = ['Name', 'Email', 'Phone', 'Course', 'Message', 'Timestamp']
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             
-            # Write headers if file is new
             if not file_exists:
                 writer.writeheader()
             
-            # Write the data
-            writer.writerow(admission_data)
+            writer.writerow({
+                'Name': admission_data['name'],
+                'Email': admission_data['email'],
+                'Phone': admission_data['phone'],
+                'Course': admission_data['course'],
+                'Message': admission_data['message'],
+                'Timestamp': admission_data['timestamp'].strftime('%Y-%m-%d %H:%M:%S')
+            })
         
         return jsonify({
             'success': True,
-            'message': 'Application saved successfully'
+            'message': 'Application saved successfully',
+            'applicationId': str(result.inserted_id)
         }), 200
         
     except Exception as e:
@@ -197,6 +222,48 @@ def save_admission():
         return jsonify({
             'success': False,
             'message': 'Failed to save application'
+        }), 500
+
+# Add route to get all applications (for admin purposes)
+@app.route('/api/applications', methods=['GET'])
+def get_applications():
+    try:
+        applications = list(admissions_collection.find().sort('timestamp', -1))
+        return jsonify({
+            'success': True,
+            'data': applications
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': 'Failed to fetch applications'
+        }), 500
+
+# Add route to update application status
+@app.route('/api/applications/<application_id>', methods=['PUT'])
+def update_application(application_id):
+    try:
+        data = request.get_json()
+        result = admissions_collection.update_one(
+            {'_id': ObjectId(application_id)},
+            {'$set': {'status': data.get('status')}}
+        )
+        
+        if result.modified_count:
+            return jsonify({
+                'success': True,
+                'message': 'Application status updated successfully'
+            }), 200
+        else:
+            return jsonify({
+                'success': False,
+                'message': 'Application not found'
+            }), 404
+            
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'message': 'Failed to update application status'
         }), 500
 
 if __name__ == '__main__':
