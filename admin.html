@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - American College of Nursing</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Quill Rich Text Editor -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        .sidebar-transition { transition: transform 0.3s ease-in-out; }
+        .content-transition { transition: margin-left 0.3s ease-in-out; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .preview-pane { max-height: 600px; overflow-y: auto; }
+        .image-preview { max-width: 200px; max-height: 150px; object-fit: cover; }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-96">
+            <div class="text-center mb-6">
+                <i class="fas fa-shield-alt text-4xl text-blue-600 mb-4"></i>
+                <h2 class="text-2xl font-bold text-gray-800">Admin Login</h2>
+                <p class="text-gray-600">Enter your credentials to access the dashboard</p>
+            </div>
+            
+            <form id="loginForm">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Username</label>
+                    <input type="text" id="username" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="password" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" required>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
+                    <i class="fas fa-sign-in-alt mr-2"></i>Login
+                </button>
+            </form>
+            
+            <div id="loginError" class="mt-4 text-red-600 text-sm text-center hidden"></div>
+        </div>
+    </div>
+
+    <!-- Main Dashboard -->
+    <div id="dashboard" class="hidden">
+        <!-- Sidebar -->
+        <div id="sidebar" class="fixed left-0 top-0 h-full w-64 bg-gray-800 text-white sidebar-transition z-40">
+            <div class="p-4 border-b border-gray-700">
+                <h1 class="text-xl font-bold">Admin Dashboard</h1>
+                <p class="text-gray-400 text-sm">American College of Nursing</p>
+            </div>
+            
+            <nav class="mt-4">
+                <a href="#" class="nav-item active" data-tab="hero">
+                    <i class="fas fa-home mr-3"></i>Hero Section
+                </a>
+                <a href="#" class="nav-item" data-tab="about">
+                    <i class="fas fa-info-circle mr-3"></i>About Section
+                </a>
+                <a href="#" class="nav-item" data-tab="programs">
+                    <i class="fas fa-graduation-cap mr-3"></i>Programs
+                </a>
+                <a href="#" class="nav-item" data-tab="facilities">
+                    <i class="fas fa-building mr-3"></i>Facilities
+                </a>
+                <a href="#" class="nav-item" data-tab="gallery">
+                    <i class="fas fa-images mr-3"></i>Gallery
+                </a>
+                <a href="#" class="nav-item" data-tab="testimonials">
+                    <i class="fas fa-quote-left mr-3"></i>Testimonials
+                </a>
+                <a href="#" class="nav-item" data-tab="admissions">
+                    <i class="fas fa-file-alt mr-3"></i>Admissions
+                </a>
+                <a href="#" class="nav-item" data-tab="faq">
+                    <i class="fas fa-question-circle mr-3"></i>FAQ
+                </a>
+                <a href="#" class="nav-item" data-tab="contact">
+                    <i class="fas fa-phone mr-3"></i>Contact
+                </a>
+                <a href="#" class="nav-item" data-tab="seo">
+                    <i class="fas fa-search mr-3"></i>SEO Settings
+                </a>
+                <a href="#" class="nav-item" data-tab="footer">
+                    <i class="fas fa-copyright mr-3"></i>Footer
+                </a>
+            </nav>
+            
+            <div class="absolute bottom-4 left-4 right-4">
+                <button id="logoutBtn" class="w-full bg-red-600 text-white py-2 px-4 rounded-lg hover:bg-red-700 transition duration-200">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="ml-64 content-transition">
+            <!-- Header -->
+            <header class="bg-white shadow-sm border-b border-gray-200 p-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center">
+                        <button id="sidebarToggle" class="lg:hidden mr-4 text-gray-600">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h2 id="pageTitle" class="text-2xl font-semibold text-gray-800">Hero Section</h2>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4">
+                        <button id="previewBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-200">
+                            <i class="fas fa-eye mr-2"></i>Preview
+                        </button>
+                        <button id="saveBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-200">
+                            <i class="fas fa-save mr-2"></i>Save Changes
+                        </button>
+                        <button id="exportBtn" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-200">
+                            <i class="fas fa-download mr-2"></i>Export
+                        </button>
+                        <input type="file" id="importFile" accept=".json" class="hidden">
+                        <button id="importBtn" class="bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition duration-200">
+                            <i class="fas fa-upload mr-2"></i>Import
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="p-6">
+                <!-- Hero Section Tab -->
+                <div id="hero-tab" class="tab-content active">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Hero Content</h3>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Institution Name</label>
+                                <input type="text" id="hero-institution-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="American Nursing Institutions">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Established Year</label>
+                                <input type="text" id="hero-established" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="ESTABLISHED 1988">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Main Heading</label>
+                                <input type="text" id="hero-heading" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="Excellence in Healthcare Education">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <div id="hero-description-editor" style="height: 120px;"></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Background Video</label>
+                                <input type="file" id="hero-video" accept="video/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                <p class="text-sm text-gray-500 mt-1">Upload MP4 video for hero background</p>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Primary Button Text</label>
+                                    <input type="text" id="hero-btn1-text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="Explore Programs">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Primary Button Link</label>
+                                    <input type="text" id="hero-btn1-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="#programs">
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Secondary Button Text</label>
+                                    <input type="text" id="hero-btn2-text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="Visit Campus">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Secondary Button Link</label>
+                                    <input type="text" id="hero-btn2-link" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="#contact">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Live Preview</h3>
+                            <div id="hero-preview" class="preview-pane border border-gray-200 rounded-lg p-4 bg-gray-50">
+                                <!-- Preview content will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Section Tab -->
+                <div id="about-tab" class="tab-content">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">About Content</h3>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Section Title</label>
+                                <input type="text" id="about-title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="About American College of Nursing">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                                <input type="text" id="about-subtitle" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500" value="Shaping healthcare professionals with excellence, ethics, and expertise since 1988.">
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                                <div id="about-description-editor" style="height: 150px;"></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-medium text-gray-700 mb-2">Statistics</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Years of Excellence</label>
+                                        <input type="text" id="stat-years" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="36+">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Successful Alumni</label>
+                                        <input type="text" id="stat-alumni" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="3,240+">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Placement Rate</label>
+                                        <input type="text" id="stat-placement" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="98%">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Expert Faculty</label>
+                                        <input type="text" id="stat-faculty" class="w-full px-3 py-2 border border-gray-300 rounded-lg" value="25+">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <h3 class="text-lg font-semibold mb-4">Live Preview</h3>
+                            <div id="about-preview" class="preview-pane border border-gray-200 rounded-lg p-4 bg-gray-50">
+                                <!-- Preview content will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programs Section Tab -->
+                <div id="programs-tab" class="tab-content">
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-lg font-semibold">Programs Management</h3>
+                            <button id="addProgramBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+                                <i class="fas fa-plus mr-2"></i>Add Program
+                            </button>
+                        </div>
+                        
+                        <div id="programsList" class="space-y-4">
+                            <!-- Programs will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other tabs will be added similarly -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="previewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white w-11/12 h-5/6 rounded-lg shadow-xl overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b">
+                <h3 class="text-lg font-semibold">Website Preview</h3>
+                <button id="closePreview" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <iframe id="previewFrame" class="w-full h-full" src=""></iframe>
+        </div>
+    </div>
+
+    <script src="static/js/admin.js"></script>
+</body>
+</html> 
