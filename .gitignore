@@ -68,6 +68,14 @@ typings/
 .env.test.local
 .env.production.local
 
+# Security - Additional environment and credential files
+.env.*
+!.env.example
+*.env
+config.json
+secrets.json
+credentials.json
+
 # parcel-bundler cache
 .cache
 .parcel-cache

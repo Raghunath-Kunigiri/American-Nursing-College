@@ -15,10 +15,11 @@ def connect_db(mongodb_uri=None):
     global db_client, db
     
     try:
-        # Use provided URI or default
+        # Use provided URI or get from environment
         if not mongodb_uri:
-            mongodb_uri = os.getenv('MONGODB_URI', 
-                'mongodb+srv://kunigiriraghunath9493:GUd96cGu12jowTrR@acn.oa10h.mongodb.net/?retryWrites=true&w=majority&appName=ACN')
+            mongodb_uri = os.getenv('MONGODB_URI')
+            if not mongodb_uri:
+                raise ValueError("MONGODB_URI environment variable is required")
         
         # Create MongoDB client
         db_client = MongoClient(

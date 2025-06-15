@@ -3,7 +3,11 @@ const mongoose = require('mongoose');
 // MongoDB connection configuration
 const connectDB = async () => {
     try {
-        const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://kunigiriraghunath9493:X3W7HJLG0HaCvQCG@acn.oa10h.mongodb.net/american_nursing_college?retryWrites=true&w=majority';
+        const mongoURI = process.env.MONGODB_URI;
+        
+        if (!mongoURI) {
+            throw new Error('MONGODB_URI environment variable is required');
+        }
         
         const conn = await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
