@@ -513,7 +513,7 @@ class StatsDisplay {
 
     animateCounter(element, targetValue) {
         const startValue = 0;
-        const duration = 2000; // 2 seconds
+        const duration = 1000; // 1 second (faster)
         const startTime = performance.now();
 
         const updateCounter = (currentTime) => {
